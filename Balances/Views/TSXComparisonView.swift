@@ -11,6 +11,12 @@ struct TSXComparisonView: View {
     )
     private var years: FetchedResults<TSXYear>
 
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \BalanceEntry.date, ascending: true)],
+        animation: .default
+    )
+    private var entries: FetchedResults<BalanceEntry>
+
     @State private var selection: TSXYear.ID?
     @State private var editorYear: TSXYear?
     @State private var showEditor = false
@@ -93,7 +99,8 @@ struct TSXComparisonView: View {
 
     @ViewBuilder
     private var summaryView: some View {
-        if let cmp = TSXModel.comparison(Array(years).inputs) {
+        let portfolio = PortfolioStats.summary(Array(entries).statsInputs)
+        if let cmp = TSXModel.comparison(years: Array(years).inputs, portfolio: portfolio) {
             VStack(alignment: .leading, spacing: 10) {
                 Text("Summary").font(.title3).bold()
                 Grid(alignment: .trailing, horizontalSpacing: 24, verticalSpacing: 8) {

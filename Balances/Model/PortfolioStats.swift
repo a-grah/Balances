@@ -68,11 +68,33 @@ enum PortfolioStats {
         entries.map(\.adjustment).filter { $0 < 0 }.reduce(0, +)
     }
 
+    /// Collapses multiple same-day snapshots to one representative per day
+    /// (the last entry of that day, in stable input order) so boundary
+    /// values like the starting balance are deterministic. Returns the
+    /// representatives in ascending date order.
+    static func dailyCollapsed(_ entries: [StatsInput]) -> [StatsInput] {
+        let cal = Calendar.current
+        let ordered = entries.enumerated().sorted {
+            $0.element.date != $1.element.date
+                ? $0.element.date < $1.element.date
+                : $0.offset < $1.offset
+        }.map(\.element)
+        var byDay: [Date: StatsInput] = [:]
+        var order: [Date] = []
+        for e in ordered {
+            let day = cal.startOfDay(for: e.date)
+            if byDay[day] == nil { order.append(day) }
+            byDay[day] = e        // keep last snapshot of the day
+        }
+        return order.map { byDay[$0]! }
+    }
+
     static func summary(_ entries: [StatsInput]) -> PortfolioSummary {
-        let sorted = entries.sorted { $0.date < $1.date }
-        let start = sorted.first?.balance ?? 0
-        let current = sorted.last?.balance ?? 0
-        let netCashFlows = sorted.map(\.adjustment).reduce(0, +)
+        let daily = dailyCollapsed(entries)
+        let start = daily.first?.balance ?? 0
+        let current = daily.last?.balance ?? 0
+        // Cash flows count every entry, not just the daily representatives.
+        let netCashFlows = entries.map(\.adjustment).reduce(0, +)
         let gain = current - start - netCashFlows
         let denom = start + netCashFlows
         let pct = denom != 0 ? gain / denom : 0
@@ -117,14 +139,18 @@ struct TSXComparison {
 }
 
 enum TSXModel {
-    /// Year 1: start × (1 + return) + cashFlows.
-    /// Later years: prevSimulated × (1 + return) + cashFlows.
+    /// Chained simulation of investing in the index with the same cash flows,
+    /// mirroring the source spreadsheet exactly: the first year establishes
+    /// the baseline from its Actual Start, the second year re-bases to its own
+    /// Actual Start (a quirk of the original sheet), and every later year
+    /// compounds from the previous simulated value:
+    ///   simulated = base × (1 + return) + cashFlows
     static func simulate(_ years: [TSXYearInput]) -> [TSXRow] {
         let ordered = years.sorted { $0.sortOrder < $1.sortOrder }
         var prev: Double?
         var rows: [TSXRow] = []
-        for y in ordered {
-            let base = prev ?? y.actualStart
+        for (i, y) in ordered.enumerated() {
+            let base = (i < 2 || prev == nil) ? y.actualStart : prev!
             let sim = base * (1 + y.tsxReturn) + y.netCashFlows
             rows.append(TSXRow(input: y, simulated: sim))
             prev = sim
@@ -132,28 +158,28 @@ enum TSXModel {
         return rows
     }
 
-    static func comparison(_ years: [TSXYearInput]) -> TSXComparison? {
+    /// Builds the Your Portfolio vs TSX Equivalent vs Difference summary.
+    /// The "Your Portfolio" column is supplied from the actual balance
+    /// entries (the same source as the Dashboard) so the two tabs agree;
+    /// the "TSX Equivalent" column is the self-consistent simulated benchmark
+    /// derived from the yearly index data.
+    static func comparison(years: [TSXYearInput], portfolio: PortfolioSummary) -> TSXComparison? {
         let ordered = years.sorted { $0.sortOrder < $1.sortOrder }
-        guard let first = ordered.first, let last = ordered.last else { return nil }
+        guard let first = ordered.first else { return nil }
         let rows = simulate(ordered)
-        let start = first.actualStart
-        let netCF = ordered.map(\.netCashFlows).reduce(0, +)
-        let portfolioEnd = last.actualEnd
+        let tsxStart = first.actualStart
+        let tsxNetCF = ordered.map(\.netCashFlows).reduce(0, +)
         let tsxEnd = rows.last?.simulated ?? 0
+        let tsxGain = tsxEnd - tsxStart - tsxNetCF
+        let tsxDenom = tsxStart + tsxNetCF
+        let tsxPct = tsxDenom != 0 ? tsxGain / tsxDenom : 0
 
-        func gain(end: Double) -> Double { end - start - netCF }
-        func pct(_ g: Double) -> Double {
-            let denom = start + netCF
-            return denom != 0 ? g / denom : 0
-        }
-        let pGain = gain(end: portfolioEnd)
-        let tGain = gain(end: tsxEnd)
         return TSXComparison(
-            startingBalance: (start, start),
-            netCashFlows: (netCF, netCF),
-            currentValue: (portfolioEnd, tsxEnd),
-            investmentGain: (pGain, tGain),
-            gainPercent: (pct(pGain), pct(tGain))
+            startingBalance: (portfolio.startingBalance, tsxStart),
+            netCashFlows: (portfolio.netCashFlows, tsxNetCF),
+            currentValue: (portfolio.currentValue, tsxEnd),
+            investmentGain: (portfolio.investmentGain, tsxGain),
+            gainPercent: (portfolio.gainPercent, tsxPct)
         )
     }
 }
