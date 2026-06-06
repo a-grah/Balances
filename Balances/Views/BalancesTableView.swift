@@ -74,19 +74,24 @@ struct BalancesTableView: View {
         .toolbar {
             ToolbarItemGroup {
                 Button { addEntry() } label: { Label("Add", systemImage: "plus") }
+                    .help("Add a new balance entry")
                 Button { editSelected() } label: { Label("Edit", systemImage: "pencil") }
                     .disabled(selection.count != 1)
+                    .help("Edit the selected entry")
                 Button(role: .destructive) { deleteSelected() } label: {
                     Label("Delete", systemImage: "trash")
                 }
                 .disabled(selection.isEmpty)
+                .help("Delete the selected entries")
                 Divider()
                 Button { CSVPorter.export(Array(entries)) } label: {
                     Label("Export CSV", systemImage: "square.and.arrow.up")
                 }
+                .help("Export all entries to a CSV file")
                 Button { importCSV() } label: {
                     Label("Import CSV", systemImage: "square.and.arrow.down")
                 }
+                .help("Import entries from a CSV file")
             }
         }
         .sheet(isPresented: $showEditor) {
