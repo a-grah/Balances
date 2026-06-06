@@ -15,6 +15,44 @@ enum CSVPorter {
         return f
     }()
 
+    /// Date formats accepted on import, tried in order (ISO first, then the
+    /// common North-American slash forms, then a couple of spelled-out ones).
+    private static let importDateFormatters: [DateFormatter] = {
+        ["yyyy-MM-dd", "yyyy/MM/dd", "MM/dd/yyyy", "M/d/yyyy",
+         "yyyy-MM-dd'T'HH:mm:ss", "MMM d, yyyy", "d MMM yyyy", "MMMM d, yyyy"]
+            .map { fmt in
+                let f = DateFormatter()
+                f.calendar = Calendar(identifier: .gregorian)
+                f.locale = Locale(identifier: "en_US_POSIX")
+                f.dateFormat = fmt
+                return f
+            }
+    }()
+
+    private static func parseDate(_ s: String) -> Date? {
+        let t = s.trimmingCharacters(in: .whitespaces)
+        for f in importDateFormatters where f.date(from: t) != nil {
+            return f.date(from: t)
+        }
+        return nil
+    }
+
+    /// Parses a number tolerating "$", thousands commas, surrounding spaces,
+    /// and accounting-style negatives like "(1,234)".
+    private static func parseNumber(_ s: String) -> Double? {
+        var t = s.trimmingCharacters(in: .whitespaces)
+        var negate = false
+        if t.hasPrefix("(") && t.hasSuffix(")") {
+            negate = true
+            t = String(t.dropFirst().dropLast())
+        }
+        t = t.replacingOccurrences(of: "$", with: "")
+             .replacingOccurrences(of: ",", with: "")
+             .replacingOccurrences(of: " ", with: "")
+        guard let v = Double(t) else { return nil }
+        return negate ? -v : v
+    }
+
     // MARK: Export
 
     static func csvString(for entries: [BalanceEntry]) -> String {
@@ -61,29 +99,43 @@ enum CSVPorter {
         let panel = NSOpenPanel()
         panel.allowedContentTypes = [.commaSeparatedText, .text]
         panel.allowsMultipleSelection = false
+        panel.message = "Choose a CSV with columns: Date, Balance, Adjustment, Transfers, Note"
         guard panel.runModal() == .OK, let url = panel.url else { return nil }
         guard let text = try? String(contentsOf: url, encoding: .utf8) else {
             presentError("Could not read file.")
             return nil
         }
         var imported = 0
+        var skipped = 0
         let rows = parse(text)
         for (i, cols) in rows.enumerated() {
-            // Skip header row if present.
-            if i == 0, cols.first?.lowercased() == "date" { continue }
-            guard cols.count >= 2 else { continue }
-            guard let date = dateFormatter.date(from: cols[0].trimmingCharacters(in: .whitespaces)),
-                  let balance = Double(cols[1].trimmingCharacters(in: .whitespaces)) else { continue }
+            // Skip a header row if present.
+            if i == 0, cols.first?.lowercased().contains("date") == true { continue }
+            // Ignore fully blank lines.
+            guard cols.contains(where: { !$0.trimmingCharacters(in: .whitespaces).isEmpty }) else { continue }
+            guard cols.count >= 2,
+                  let date = parseDate(cols[0]),
+                  let balance = parseNumber(cols[1]) else {
+                skipped += 1
+                continue
+            }
             let e = BalanceEntry(context: context)
             e.id = UUID()
             e.date = date
             e.balance = balance
-            e.adjustment = cols.count > 2 ? (Double(cols[2].trimmingCharacters(in: .whitespaces)) ?? 0) : 0
-            e.transfers = cols.count > 3 ? (Double(cols[3].trimmingCharacters(in: .whitespaces)) ?? 0) : 0
+            e.adjustment = cols.count > 2 ? (parseNumber(cols[2]) ?? 0) : 0
+            e.transfers = cols.count > 3 ? (parseNumber(cols[3]) ?? 0) : 0
             e.note = cols.count > 4 ? unescape(cols[4]) : nil
             imported += 1
         }
-        do { try context.save() } catch { presentError("Save failed: \(error.localizedDescription)") }
+        if imported > 0 {
+            do { try context.save() }
+            catch {
+                presentError("Save failed: \(error.localizedDescription)")
+                return imported
+            }
+        }
+        presentResult(imported: imported, skipped: skipped)
         return imported
     }
 
@@ -131,6 +183,24 @@ enum CSVPorter {
     private static func unescape(_ s: String) -> String? {
         let t = s.trimmingCharacters(in: .whitespaces)
         return t.isEmpty ? nil : t
+    }
+
+    private static func presentResult(imported: Int, skipped: Int) {
+        let alert = NSAlert()
+        if imported == 0 {
+            alert.alertStyle = .warning
+            alert.messageText = "No rows imported"
+            alert.informativeText = "Expected columns: Date, Balance, Adjustment, Transfers, Note. "
+                + "Dates such as 2026-06-04 or 06/04/2026 are accepted."
+                + (skipped > 0 ? "\n\n\(skipped) row(s) couldn't be parsed." : "")
+        } else {
+            alert.alertStyle = .informational
+            alert.messageText = "Imported \(imported) \(imported == 1 ? "entry" : "entries")"
+            if skipped > 0 {
+                alert.informativeText = "\(skipped) row(s) were skipped (couldn't be parsed)."
+            }
+        }
+        alert.runModal()
     }
 
     private static func presentError(_ message: String) {
