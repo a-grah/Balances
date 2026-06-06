@@ -1,5 +1,7 @@
 # Balances
 
+[![Build](https://github.com/a-grah/Balances/actions/workflows/build.yml/badge.svg)](https://github.com/a-grah/Balances/actions/workflows/build.yml)
+
 A native macOS app (SwiftUI + Core Data) for tracking an investment portfolio over time. It logs dated balance snapshots, shows portfolio statistics and a balance-over-time chart, and benchmarks performance against the S&P/TSX Composite. Modeled on a "Portfolio Balance Performance" spreadsheet.
 
 ## Features
