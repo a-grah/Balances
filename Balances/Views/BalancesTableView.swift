@@ -13,7 +13,6 @@ struct BalancesTableView: View {
 
     @State private var selection = Set<BalanceEntry.ID>()
     @State private var editorEntry: BalanceEntry?
-    @State private var showEditor = false
 
     private var adjustedByID: [NSManagedObjectID: Double] {
         var map: [NSManagedObjectID: Double] = [:]
@@ -94,11 +93,8 @@ struct BalancesTableView: View {
                 .help("Import entries from a CSV file")
             }
         }
-        .sheet(isPresented: $showEditor) {
-            if let editorEntry {
-                EntryEditorView(entry: editorEntry)
-                    .environment(\.managedObjectContext, context)
-            }
+        .modalOverlay(item: $editorEntry) { entry, dismiss in
+            EntryEditorView(entry: entry, onClose: dismiss)
         }
     }
 
@@ -108,7 +104,6 @@ struct BalancesTableView: View {
         e.date = Date()
         e.balance = 0
         editorEntry = e
-        showEditor = true
     }
 
     private func editSelected() {
@@ -118,7 +113,6 @@ struct BalancesTableView: View {
 
     private func editEntry(with id: BalanceEntry.ID) {
         editorEntry = entries.first { $0.id == id }
-        showEditor = editorEntry != nil
     }
 
     private func deleteSelected() {
@@ -141,9 +135,9 @@ struct BalancesTableView: View {
 /// Add/edit sheet for a single balance entry.
 struct EntryEditorView: View {
     @Environment(\.managedObjectContext) private var context
-    @Environment(\.dismiss) private var dismiss
 
     @ObservedObject var entry: BalanceEntry
+    let onClose: () -> Void
 
     @State private var dateText = ""
     @State private var balance = ""
@@ -179,6 +173,7 @@ struct EntryEditorView: View {
 
             HStack {
                 Button("Cancel", role: .cancel) { cancel() }
+                    .keyboardShortcut(.cancelAction)
                 Spacer()
                 Button("Save") { save() }
                     .keyboardShortcut(.defaultAction)
@@ -211,7 +206,7 @@ struct EntryEditorView: View {
         entry.transfers = Double(transfers.trimmingCharacters(in: .whitespaces)) ?? 0
         entry.note = note.isEmpty ? nil : note
         try? context.save()
-        dismiss()
+        onClose()
     }
 
     private func cancel() {
@@ -219,6 +214,6 @@ struct EntryEditorView: View {
             context.delete(entry)
         }
         context.rollback()
-        dismiss()
+        onClose()
     }
 }

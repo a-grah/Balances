@@ -88,9 +88,8 @@ struct TSXComparisonView: View {
                 .disabled(selection == nil)
             }
         }
-        .sheet(item: $editorYear) { year in
-            TSXYearEditorView(year: year)
-                .environment(\.managedObjectContext, context)
+        .modalOverlay(item: $editorYear) { year, dismiss in
+            TSXYearEditorView(year: year, onClose: dismiss)
         }
     }
 
@@ -168,9 +167,9 @@ struct TSXComparisonView: View {
 
 struct TSXYearEditorView: View {
     @Environment(\.managedObjectContext) private var context
-    @Environment(\.dismiss) private var dismiss
 
     @ObservedObject var year: TSXYear
+    let onClose: () -> Void
 
     @State private var label = ""
     @State private var yearText = ""
@@ -205,6 +204,7 @@ struct TSXYearEditorView: View {
 
             HStack {
                 Button("Cancel", role: .cancel) { cancel() }
+                    .keyboardShortcut(.cancelAction)
                 Spacer()
                 Button("Save") { save() }.keyboardShortcut(.defaultAction)
             }
@@ -234,12 +234,41 @@ struct TSXYearEditorView: View {
         year.actualStart = Double(actualStart.trimmingCharacters(in: .whitespaces)) ?? 0
         year.actualEnd = Double(actualEnd.trimmingCharacters(in: .whitespaces)) ?? 0
         try? context.save()
-        dismiss()
+        onClose()
     }
 
     private func cancel() {
         if year.isInserted { context.delete(year) }
         context.rollback()
-        dismiss()
+        onClose()
+    }
+}
+
+extension View {
+    /// Presents `content` as a centered modal overlay drawn inside the current
+    /// window, rather than in a separate sheet window.
+    ///
+    /// SwiftUI's `.sheet` spins up its own `NSWindow`, which on multi-display
+    /// setups is frequently mis-positioned off-screen when the parent window
+    /// lives on a secondary monitor. Drawing the editor in-window sidesteps
+    /// that entirely: it always appears on the same display, centered on the
+    /// window. The dimmed backdrop swallows clicks so the content behind stays
+    /// inert while the editor is up.
+    func modalOverlay<Item: Identifiable, Body: View>(
+        item: Binding<Item?>,
+        @ViewBuilder content: @escaping (Item, _ dismiss: @escaping () -> Void) -> Body
+    ) -> some View {
+        let dismiss: () -> Void = { item.wrappedValue = nil }
+        return ZStack {
+            self
+            if let value = item.wrappedValue {
+                Color.black.opacity(0.25)
+                    .ignoresSafeArea()
+                    .onTapGesture { }
+                content(value, dismiss)
+                    .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+                    .shadow(radius: 24)
+            }
+        }
     }
 }
