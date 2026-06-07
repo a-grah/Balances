@@ -19,7 +19,6 @@ struct TSXComparisonView: View {
 
     @State private var selection: TSXYear.ID?
     @State private var editorYear: TSXYear?
-    @State private var showEditor = false
 
     private var simulatedByOrder: [Int: Double] {
         var map: [Int: Double] = [:]
@@ -89,11 +88,9 @@ struct TSXComparisonView: View {
                 .disabled(selection == nil)
             }
         }
-        .sheet(isPresented: $showEditor) {
-            if let editorYear {
-                TSXYearEditorView(year: editorYear)
-                    .environment(\.managedObjectContext, context)
-            }
+        .sheet(item: $editorYear) { year in
+            TSXYearEditorView(year: year)
+                .environment(\.managedObjectContext, context)
         }
     }
 
@@ -151,7 +148,6 @@ struct TSXComparisonView: View {
         y.sortOrder = Int16(maxOrder + 1)
         y.year = Int32((years.compactMap { $0.year == 0 ? nil : Int($0.year) }.max() ?? 2014) + 1)
         editorYear = y
-        showEditor = true
     }
 
     private func editSelected() {
@@ -160,7 +156,6 @@ struct TSXComparisonView: View {
 
     private func edit(_ id: TSXYear.ID) {
         editorYear = years.first { $0.id == id }
-        showEditor = editorYear != nil
     }
 
     private func deleteSelected() {
