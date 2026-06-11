@@ -96,6 +96,3 @@ Balances/
 - **TSX simulation** intentionally mirrors the source spreadsheet's chaining (the second year re-bases to its own actual start, then later years compound), so the simulated value matches the original sheet. See `TSXModel.simulate` in `Model/PortfolioStats.swift`.
 - The app is **ad-hoc signed** for personal use. Sharing it with others would require Developer ID signing + notarization to avoid Gatekeeper prompts.
 
-## Versioning
-
-Current version **1.2**. Tagged releases: `v1.1`, `v1.2`.
