@@ -28,6 +28,7 @@ struct RootView: View {
             Text(daysLeft == 1 ? "Trial: 1 day left" : "Trial: \(daysLeft) days left")
                 .foregroundStyle(.secondary)
             Spacer()
+            Link("Purchase…", destination: LicensingState.purchaseURL)
             Button("Activate…") { openWindow(id: "license-entry") }
         }
         .font(.callout)

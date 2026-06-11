@@ -27,6 +27,10 @@ struct LicensingGateView: View {
                 }
             }
             .frame(maxWidth: 420)
+
+            Link("Purchase a license at store.bluepill.ca",
+                 destination: LicensingState.purchaseURL)
+                .font(.callout)
         }
         .padding(40)
         .frame(minWidth: 480, minHeight: 360)

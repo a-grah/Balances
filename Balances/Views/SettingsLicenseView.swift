@@ -44,14 +44,24 @@ struct SettingsLicenseView: View {
             }
 
         case .trial(let daysLeft):
-            Label(
-                daysLeft == 1 ? "Trial: 1 day left" : "Trial: \(daysLeft) days left",
-                systemImage: "clock"
-            )
+            VStack(alignment: .leading, spacing: 4) {
+                Label(
+                    daysLeft == 1 ? "Trial: 1 day left" : "Trial: \(daysLeft) days left",
+                    systemImage: "clock"
+                )
+                Link("Purchase a license at store.bluepill.ca",
+                     destination: LicensingState.purchaseURL)
+                    .font(.callout)
+            }
 
         case .blocked:
-            Label("Trial expired", systemImage: "lock.fill")
-                .foregroundStyle(.red)
+            VStack(alignment: .leading, spacing: 4) {
+                Label("Trial expired", systemImage: "lock.fill")
+                    .foregroundStyle(.red)
+                Link("Purchase a license at store.bluepill.ca",
+                     destination: LicensingState.purchaseURL)
+                    .font(.callout)
+            }
         }
     }
 }

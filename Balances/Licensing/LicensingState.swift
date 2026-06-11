@@ -17,6 +17,9 @@ final class LicensingState {
         }
     }
 
+    /// Where users can buy a license; surfaced wherever the app is in a trial or blocked state.
+    static let purchaseURL = URL(string: "https://store.bluepill.ca/products/Balances%20Portfolio%20Tracker")!
+
     private(set) var status: Status
 
     private let store: LicenseStore
