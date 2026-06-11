@@ -3,7 +3,12 @@ import CoreData
 
 /// The dashboard "NEW ENTRY" form. Adds a dated balance snapshot.
 struct NewEntryFormView: View {
+    private enum Field: Hashable {
+        case date, balance, adjustment, transfers, note
+    }
+
     @Environment(\.managedObjectContext) private var context
+    @FocusState private var focusedField: Field?
 
     @State private var dateText = Fmt.isoString(Date())
     @State private var balance = ""
@@ -11,9 +16,17 @@ struct NewEntryFormView: View {
     @State private var transfers = ""
     @State private var note = ""
     @State private var errorMessage: String?
+    @State private var showDatePicker = false
 
     private var balanceValue: Double? { Double(balance.trimmingCharacters(in: .whitespaces)) }
     private var dateValue: Date? { Fmt.parseDay(dateText) }
+
+    private var datePickerBinding: Binding<Date> {
+        Binding(
+            get: { dateValue ?? Date() },
+            set: { dateText = Fmt.isoString($0) }
+        )
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -21,22 +34,41 @@ struct NewEntryFormView: View {
                 .font(.title2).bold()
 
             VStack(alignment: .leading, spacing: 4) {
-                field("Date", text: $dateText, prompt: "YYYY-MM-DD")
+                Text("Date").font(.caption).foregroundStyle(.secondary)
+                HStack {
+                    TextField("YYYY-MM-DD", text: $dateText)
+                        .textFieldStyle(.roundedBorder)
+                        .focused($focusedField, equals: .date)
+                        .onSubmit { focusedField = .balance }
+                    Button {
+                        showDatePicker = true
+                    } label: {
+                        Image(systemName: "calendar")
+                    }
+                    .popover(isPresented: $showDatePicker) {
+                        DatePicker("", selection: datePickerBinding, displayedComponents: .date)
+                            .datePickerStyle(.graphical)
+                            .labelsHidden()
+                            .padding()
+                            .onChange(of: dateText) { showDatePicker = false }
+                    }
+                }
                 if !dateText.trimmingCharacters(in: .whitespaces).isEmpty, dateValue == nil {
                     Text("Use YYYY-MM-DD format (e.g. 2026-06-04).")
                         .foregroundStyle(.red).font(.caption)
                 }
             }
 
-            field("Balance", text: $balance, prompt: "Required, e.g. 1242000")
-            field("Adjustment", text: $adjustment, prompt: "Cash flow: + deposit / − withdrawal")
-            field("Transfers", text: $transfers, prompt: "Optional")
+            field("Balance", text: $balance, prompt: "Required, e.g. 1242000", focus: .balance, next: .adjustment)
+            field("Adjustment", text: $adjustment, prompt: "Cash flow: + deposit / − withdrawal", focus: .adjustment, next: .transfers)
+            field("Transfers", text: $transfers, prompt: "Optional", focus: .transfers, next: .note)
 
             VStack(alignment: .leading, spacing: 4) {
                 Text("Note").font(.caption).foregroundStyle(.secondary)
                 TextField("Optional", text: $note, axis: .vertical)
                     .textFieldStyle(.roundedBorder)
                     .lineLimit(1...3)
+                    .focused($focusedField, equals: .note)
             }
 
             if let errorMessage {
@@ -47,17 +79,18 @@ struct NewEntryFormView: View {
                 Button("Clear", role: .cancel, action: clear)
                 Spacer()
                 Button("Submit", action: submit)
-                    .keyboardShortcut(.defaultAction)
                     .disabled(balanceValue == nil || dateValue == nil)
             }
         }
     }
 
-    private func field(_ label: String, text: Binding<String>, prompt: String) -> some View {
+    private func field(_ label: String, text: Binding<String>, prompt: String, focus: Field, next: Field) -> some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(label).font(.caption).foregroundStyle(.secondary)
             TextField(prompt, text: text)
                 .textFieldStyle(.roundedBorder)
+                .focused($focusedField, equals: focus)
+                .onSubmit { focusedField = next }
         }
     }
 

@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		1F10BDD8DF8B64F131A6C37E /* BalancesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CB6B2AA09762F03E306386 /* BalancesApp.swift */; };
 		52DBA75718417C6077F87C4D /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355B76CB7451179291173223 /* Persistence.swift */; };
+		A37EFA64638642BE8B34FD29 /* Licensing/KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3DF09F76B042FA9768EBAE /* Licensing/KeychainStore.swift */; };
+		1D9F50B270EE41B6BE3E45F0 /* Licensing/LicenseVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80F5D08E8E14E4590DE56CE /* Licensing/LicenseVerifier.swift */; };
+		E4848187485E49AE9E73D10E /* Licensing/LicenseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6B3E73B87D4A32A61C1262 /* Licensing/LicenseStore.swift */; };
+		FC64EDEE5E0E4401955D9CCF /* Licensing/LicensingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFDB2D5ADF04C8CAD5A4AFB /* Licensing/LicensingState.swift */; };
+		EF77F51FA0A74B0797927789 /* Views/LicenseEntryControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485B67293F91472CBC43FE7C /* Views/LicenseEntryControls.swift */; };
+		00D77EA1F40E4940BAEE23B8 /* Views/LicensingGateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022580A411EB45FA92AD379B /* Views/LicensingGateView.swift */; };
+		5CDEA26A4BCF4025B45A7EC0 /* Views/RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93C327463D4F5E9A1DD84C /* Views/RootView.swift */; };
+		4117FF82BA5B4AA1B03526B6 /* Views/SettingsLicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B80D41745B346E1B53EF73C /* Views/SettingsLicenseView.swift */; };
+		9F1E2D3C4B5A6978E0D1C2B3 /* Views/LicenseEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D2C3B4A5968F7E6D5C4B3 /* Views/LicenseEntryView.swift */; };
 		65585A720BDFA1A81106ED00 /* Model/CSVPorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6320912DFB5F39AF2FF6196 /* Model/CSVPorter.swift */; };
 		1CA0F31AAB48B282688B0EFF /* Model/CoreDataAdapters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E364FDE4A0F606A728FC028 /* Model/CoreDataAdapters.swift */; };
 		2EB3C27214F06C38FC56CCAC /* Model/DateRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3D77AE4BA7567E82A05D0E /* Model/DateRange.swift */; };
@@ -50,6 +59,15 @@
 		5B04B2273026590A440D27C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets.xcassets"; sourceTree = "<group>"; };
 		1507F021100E808DBE2FAA00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info.plist"; sourceTree = "<group>"; };
 		5B15A16BA7386D7C5079CD7E /* Balances.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Balances.entitlements"; sourceTree = "<group>"; };
+		2B3DF09F76B042FA9768EBAE /* KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeychainStore.swift"; sourceTree = "<group>"; };
+		F80F5D08E8E14E4590DE56CE /* LicenseVerifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LicenseVerifier.swift"; sourceTree = "<group>"; };
+		DB6B3E73B87D4A32A61C1262 /* LicenseStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LicenseStore.swift"; sourceTree = "<group>"; };
+		7AFDB2D5ADF04C8CAD5A4AFB /* LicensingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LicensingState.swift"; sourceTree = "<group>"; };
+		485B67293F91472CBC43FE7C /* LicenseEntryControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LicenseEntryControls.swift"; sourceTree = "<group>"; };
+		022580A411EB45FA92AD379B /* LicensingGateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LicensingGateView.swift"; sourceTree = "<group>"; };
+		FA93C327463D4F5E9A1DD84C /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootView.swift"; sourceTree = "<group>"; };
+		2B80D41745B346E1B53EF73C /* SettingsLicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsLicenseView.swift"; sourceTree = "<group>"; };
+		7E1D2C3B4A5968F7E6D5C4B3 /* LicenseEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LicenseEntryView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +105,7 @@
 				AC83687B63FD60BD00BB3ADB /* Balances.xcdatamodeld */,
 				5B04B2273026590A440D27C9 /* Assets.xcassets */,
 				F47655696FADD8034DF690FF /* Model */,
+				3B584A608168441CBC356B9E /* Licensing */,
 				D8AA556D97B214A15F0ECBDB /* Views */,
 				5FDC85C69B4BE2D240E61DD5 /* Resources */,
 				1507F021100E808DBE2FAA00 /* Info.plist */,
@@ -115,11 +134,27 @@
 				B1F07F329B2935E83C869CD5 /* BalancesTableView.swift */,
 				D7627741053ECD9EBC54BB2E /* ContentView.swift */,
 				DE37AAF695C983F816FEB9ED /* DashboardView.swift */,
+				485B67293F91472CBC43FE7C /* LicenseEntryControls.swift */,
+				022580A411EB45FA92AD379B /* LicensingGateView.swift */,
 				4F6F76E31AD44C884EA4A75B /* NewEntryFormView.swift */,
+				FA93C327463D4F5E9A1DD84C /* RootView.swift */,
+				2B80D41745B346E1B53EF73C /* SettingsLicenseView.swift */,
+				7E1D2C3B4A5968F7E6D5C4B3 /* LicenseEntryView.swift */,
 				D5DB0A406A92F466307193C4 /* StatsPanelView.swift */,
 				4BA6014146D4C9C8E43A0D31 /* TSXComparisonView.swift */,
 			);
 			path = "Views";
+			sourceTree = "<group>";
+		};
+		3B584A608168441CBC356B9E /* Licensing */ = {
+			isa = PBXGroup;
+			children = (
+				2B3DF09F76B042FA9768EBAE /* KeychainStore.swift */,
+				DB6B3E73B87D4A32A61C1262 /* LicenseStore.swift */,
+				F80F5D08E8E14E4590DE56CE /* LicenseVerifier.swift */,
+				7AFDB2D5ADF04C8CAD5A4AFB /* LicensingState.swift */,
+			);
+			path = "Licensing";
 			sourceTree = "<group>";
 		};
 		5FDC85C69B4BE2D240E61DD5 /* Resources */ = {
@@ -217,6 +252,15 @@
 				8F48242D25E0D2106B4786F8 /* Views/NewEntryFormView.swift in Sources */,
 				CE01411A150E419C88FC9E68 /* Views/StatsPanelView.swift in Sources */,
 				631A2B263A5C29364956C752 /* Views/TSXComparisonView.swift in Sources */,
+				A37EFA64638642BE8B34FD29 /* Licensing/KeychainStore.swift in Sources */,
+				1D9F50B270EE41B6BE3E45F0 /* Licensing/LicenseVerifier.swift in Sources */,
+				E4848187485E49AE9E73D10E /* Licensing/LicenseStore.swift in Sources */,
+				FC64EDEE5E0E4401955D9CCF /* Licensing/LicensingState.swift in Sources */,
+				EF77F51FA0A74B0797927789 /* Views/LicenseEntryControls.swift in Sources */,
+				00D77EA1F40E4940BAEE23B8 /* Views/LicensingGateView.swift in Sources */,
+				5CDEA26A4BCF4025B45A7EC0 /* Views/RootView.swift in Sources */,
+				4117FF82BA5B4AA1B03526B6 /* Views/SettingsLicenseView.swift in Sources */,
+				9F1E2D3C4B5A6978E0D1C2B3 /* Views/LicenseEntryView.swift in Sources */,
 				4F6EB2F7E93CECFC59644946 /* Balances.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -356,6 +400,7 @@
 /* Begin PBXFileReference (model child) */
 		E686880C6425A431BC558067 /* Balances.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Balances.xcdatamodel"; sourceTree = "<group>"; };
 /* End PBXFileReference (model child) */
+
 	};
 	rootObject = 98F54143AB4E86B28C3AFEE0 /* Project object */;
 }
