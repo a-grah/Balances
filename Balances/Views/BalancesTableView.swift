@@ -94,12 +94,15 @@ struct BalancesTableView: View {
             }
         }
         .modalOverlay(item: $editorEntry) { entry, dismiss in
-            EntryEditorView(entry: entry, onClose: dismiss)
+            EntryEditorView(entry: entry, isNew: entry.managedObjectContext == nil, onClose: dismiss)
         }
     }
 
     private func addEntry() {
-        let e = BalanceEntry(context: context)
+        // Create the entry detached (insertInto: nil) so it doesn't show up in the
+        // table's @FetchRequest until the user actually saves; the editor inserts it
+        // into the context on Save.
+        let e = BalanceEntry(entity: BalanceEntry.entity(), insertInto: nil)
         e.id = UUID()
         e.date = Date()
         e.balance = 0
@@ -137,6 +140,9 @@ struct EntryEditorView: View {
     @Environment(\.managedObjectContext) private var context
 
     @ObservedObject var entry: BalanceEntry
+    /// True when `entry` is a brand-new, not-yet-inserted record (created with
+    /// `insertInto: nil`); it's added to the context only on Save.
+    let isNew: Bool
     let onClose: () -> Void
 
     @State private var dateText = ""
@@ -148,7 +154,7 @@ struct EntryEditorView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
-            Text(entry.isInserted ? "Add Entry" : "Edit Entry").font(.title2).bold()
+            Text(isNew ? "Add Entry" : "Edit Entry").font(.title2).bold()
 
             LabeledContent("Date") {
                 TextField("YYYY-MM-DD", text: $dateText).textFieldStyle(.roundedBorder)
@@ -177,7 +183,7 @@ struct EntryEditorView: View {
                 Spacer()
                 Button("Save") { save() }
                     .keyboardShortcut(.defaultAction)
-                    .disabled(Double(balance.trimmingCharacters(in: .whitespaces)) == nil
+                    .disabled(Fmt.finiteNumber(balance) == nil
                               || Fmt.parseDay(dateText) == nil)
             }
         }
@@ -189,7 +195,7 @@ struct EntryEditorView: View {
     private func load() {
         guard !loaded else { return }
         dateText = Fmt.isoString(entry.date ?? Date())
-        balance = entry.isInserted && entry.balance == 0 ? "" : String(entry.balance)
+        balance = isNew && entry.balance == 0 ? "" : String(entry.balance)
         adjustment = entry.adjustment == 0 ? "" : String(entry.adjustment)
         transfers = entry.transfers == 0 ? "" : String(entry.transfers)
         note = entry.note ?? ""
@@ -197,23 +203,23 @@ struct EntryEditorView: View {
     }
 
     private func save() {
-        guard let b = Double(balance.trimmingCharacters(in: .whitespaces)),
+        guard let b = Fmt.finiteNumber(balance),
               let date = Fmt.parseDay(dateText) else { return }
+        // A new entry is detached until now; inserting it makes the save persist it.
+        if entry.managedObjectContext == nil { context.insert(entry) }
         if entry.id == nil { entry.id = UUID() }
         entry.date = date
         entry.balance = b
-        entry.adjustment = Double(adjustment.trimmingCharacters(in: .whitespaces)) ?? 0
-        entry.transfers = Double(transfers.trimmingCharacters(in: .whitespaces)) ?? 0
+        entry.adjustment = Fmt.finiteNumber(adjustment) ?? 0
+        entry.transfers = Fmt.finiteNumber(transfers) ?? 0
         entry.note = note.isEmpty ? nil : note
         try? context.save()
         onClose()
     }
 
     private func cancel() {
-        if entry.isInserted {
-            context.delete(entry)
-        }
-        context.rollback()
+        // Nothing to undo: a new entry was never inserted, and an edited entry is
+        // mutated only in save() (the fields bind to local @State), so just close.
         onClose()
     }
 }

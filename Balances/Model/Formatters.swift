@@ -45,6 +45,13 @@ enum Fmt {
         isoDay.date(from: s.trimmingCharacters(in: .whitespaces))
     }
 
+    /// Parses plain numeric text-field input, rejecting blanks and non-finite values
+    /// (`Double()` otherwise accepts "nan"/"inf", which poison every downstream stat).
+    static func finiteNumber(_ s: String) -> Double? {
+        guard let v = Double(s.trimmingCharacters(in: .whitespaces)), v.isFinite else { return nil }
+        return v
+    }
+
     static func isoString(_ d: Date) -> String {
         isoDay.string(from: d)
     }

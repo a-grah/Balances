@@ -18,7 +18,7 @@ struct NewEntryFormView: View {
     @State private var errorMessage: String?
     @State private var showDatePicker = false
 
-    private var balanceValue: Double? { Double(balance.trimmingCharacters(in: .whitespaces)) }
+    private var balanceValue: Double? { Fmt.finiteNumber(balance) }
     private var dateValue: Date? { Fmt.parseDay(dateText) }
 
     private var datePickerBinding: Binding<Date> {
@@ -107,8 +107,8 @@ struct NewEntryFormView: View {
         e.id = UUID()
         e.date = date
         e.balance = balanceValue
-        e.adjustment = Double(adjustment.trimmingCharacters(in: .whitespaces)) ?? 0
-        e.transfers = Double(transfers.trimmingCharacters(in: .whitespaces)) ?? 0
+        e.adjustment = Fmt.finiteNumber(adjustment) ?? 0
+        e.transfers = Fmt.finiteNumber(transfers) ?? 0
         e.note = note.isEmpty ? nil : note
         do {
             try context.save()

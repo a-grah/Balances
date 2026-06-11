@@ -31,8 +31,8 @@ enum CSVPorter {
 
     private static func parseDate(_ s: String) -> Date? {
         let t = s.trimmingCharacters(in: .whitespaces)
-        for f in importDateFormatters where f.date(from: t) != nil {
-            return f.date(from: t)
+        for f in importDateFormatters {
+            if let date = f.date(from: t) { return date }
         }
         return nil
     }
@@ -49,7 +49,9 @@ enum CSVPorter {
         t = t.replacingOccurrences(of: "$", with: "")
              .replacingOccurrences(of: ",", with: "")
              .replacingOccurrences(of: " ", with: "")
-        guard let v = Double(t) else { return nil }
+        // Reject NaN/Inf (and overflow like "1e400"): Double() accepts them, and a
+        // single non-finite value poisons every downstream sum/average/chart point.
+        guard let v = Double(t), v.isFinite else { return nil }
         return negate ? -v : v
     }
 
@@ -85,9 +87,17 @@ enum CSVPorter {
         }
     }
 
+    /// Characters that make a spreadsheet treat a cell as a formula. A leading one is
+    /// neutralized on export (CSV/formula injection, CWE-1236) by prefixing a single quote.
+    private static let formulaTriggers: Set<Character> = ["=", "+", "-", "@", "\t", "\r"]
+
     private static func escape(_ s: String) -> String {
-        guard s.contains(",") || s.contains("\"") || s.contains("\n") else { return s }
-        return "\"" + s.replacingOccurrences(of: "\"", with: "\"\"") + "\""
+        var value = s
+        if let first = value.first, Self.formulaTriggers.contains(first) {
+            value = "'" + value
+        }
+        guard value.contains(",") || value.contains("\"") || value.contains("\n") else { return value }
+        return "\"" + value.replacingOccurrences(of: "\"", with: "\"\"") + "\""
     }
 
     // MARK: Import
