@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dictionary SYSTEM "file://localhost/System/Library/DTDs/sdef.dtd">
+<dictionary title="Balances Terminology">
+    <suite name="Standard Suite" code="????" description="Common classes and commands for most applications.">
+        <xi:include href="file:///System/Library/ScriptingDefinitions/CocoaStandard.sdef"
+            xpointer="xpointer(/dictionary/suite[@name='Standard Suite']/*)"
+            xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    </suite>
+
+    <suite name="Balances Suite" code="BalS" description="Portfolio data exposed by Balances.">
+
+        <class name="application" code="capp" description="The Balances application." inherits="application">
+            <cocoa class="NSApplication"/>
+            <element type="balance entry" description="The portfolio's balance entries.">
+                <cocoa key="balanceEntries"/>
+            </element>
+            <element type="tsx year" description="The TSX comparison years.">
+                <cocoa key="tsxYears"/>
+            </element>
+            <property name="entry count" code="becn" type="integer" access="r"
+                description="The number of balance entries.">
+                <cocoa key="entryCount"/>
+            </property>
+            <property name="starting balance" code="bSta" type="real" access="r"
+                description="The balance of the earliest entry (on its day).">
+                <cocoa key="startingBalance"/>
+            </property>
+            <property name="current value" code="bCur" type="real" access="r"
+                description="The balance of the most recent entry (on its day).">
+                <cocoa key="currentValue"/>
+            </property>
+            <property name="net cash flows" code="bNCF" type="real" access="r"
+                description="The sum of all adjustments (deposits and withdrawals).">
+                <cocoa key="netCashFlows"/>
+            </property>
+            <property name="investment gain" code="bGai" type="real" access="r"
+                description="Current value minus starting balance minus net cash flows.">
+                <cocoa key="investmentGain"/>
+            </property>
+            <property name="gain percent" code="bGpc" type="real" access="r"
+                description="Investment gain as a fraction of starting balance plus net cash flows.">
+                <cocoa key="gainPercent"/>
+            </property>
+            <property name="maximum balance" code="bMax" type="real" access="r"
+                description="The highest balance across all entries.">
+                <cocoa key="maximumBalance"/>
+            </property>
+            <property name="total deposits" code="bDep" type="real" access="r"
+                description="The sum of all positive adjustments.">
+                <cocoa key="totalDeposits"/>
+            </property>
+            <property name="total withdrawals" code="bWdr" type="real" access="r"
+                description="The sum of all negative adjustments.">
+                <cocoa key="totalWithdrawals"/>
+            </property>
+        </class>
+
+        <class name="balance entry" code="bEnt" description="A dated portfolio balance record." plural="balance entries">
+            <cocoa class="BalanceEntry"/>
+            <property name="id" code="ID  " type="text" access="r" description="The entry's unique identifier.">
+                <cocoa key="scriptID"/>
+            </property>
+            <property name="entry date" code="bDat" type="date" description="The date of this entry.">
+                <cocoa key="date"/>
+            </property>
+            <property name="balance" code="bBal" type="real" description="The account balance on this date.">
+                <cocoa key="balance"/>
+            </property>
+            <property name="adjustment" code="bAdj" type="real" description="Deposits/withdrawals recorded on this date.">
+                <cocoa key="adjustment"/>
+            </property>
+            <property name="transfers" code="bTrf" type="real" description="Internal transfers recorded on this date.">
+                <cocoa key="transfers"/>
+            </property>
+            <property name="note" code="bNot" type="text" description="An optional note.">
+                <cocoa key="note"/>
+            </property>
+        </class>
+
+        <class name="tsx year" code="tYer" description="A TSX index benchmark year." plural="tsx years">
+            <cocoa class="TSXYear"/>
+            <property name="id" code="ID  " type="text" access="r" description="The year's unique identifier.">
+                <cocoa key="scriptID"/>
+            </property>
+            <property name="year" code="tYr " type="integer" access="r" description="The calendar year.">
+                <cocoa key="year"/>
+            </property>
+            <property name="label" code="tLbl" type="text" access="r" description="An optional display label.">
+                <cocoa key="label"/>
+            </property>
+            <property name="tsx return" code="tRet" type="real" access="r" description="The TSX index return for this year.">
+                <cocoa key="tsxReturn"/>
+            </property>
+            <property name="net cash flows" code="tNCF" type="real" access="r" description="Net cash flows for this year.">
+                <cocoa key="netCashFlows"/>
+            </property>
+            <property name="actual start" code="tSta" type="real" access="r" description="The portfolio's actual starting value for this year.">
+                <cocoa key="actualStart"/>
+            </property>
+            <property name="actual end" code="tEnd" type="real" access="r" description="The portfolio's actual ending value for this year.">
+                <cocoa key="actualEnd"/>
+            </property>
+            <property name="sort order" code="tOrd" type="integer" access="r" description="Display order among the TSX years.">
+                <cocoa key="sortOrder"/>
+            </property>
+        </class>
+
+    </suite>
+</dictionary>
