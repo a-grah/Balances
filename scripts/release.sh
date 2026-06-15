@@ -93,9 +93,18 @@ xcrun stapler staple "$APP"
 echo "==> Building DMG…"
 rm -rf "$STAGE"; mkdir -p "$STAGE"
 ditto "$APP" "$STAGE/Balances.app"
-ln -s /Applications "$STAGE/Applications"
-hdiutil create -volname "Balances $VERSION" -srcfolder "$STAGE" \
-  -ov -format UDZO "$DMG" >/dev/null
+rm -f "$DMG"
+create-dmg \
+  --volname "Balances $VERSION" \
+  --background "scripts/dmg_background.png" \
+  --window-pos 200 120 \
+  --window-size 660 400 \
+  --icon-size 128 \
+  --icon "Balances.app" 165 190 \
+  --hide-extension "Balances.app" \
+  --app-drop-link 495 190 \
+  "$DMG" \
+  "$STAGE/" >/dev/null
 rm -rf "$STAGE"
 
 echo "==> Signing DMG…"
