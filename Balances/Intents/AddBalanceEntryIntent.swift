@@ -11,6 +11,7 @@ struct AddBalanceEntryIntent: AppIntent {
         "Adds a dated balance snapshot to Balances.",
         categoryName: "Portfolio"
     )
+    static let openAppWhenRun = true
 
     // MARK: - Parameters
 

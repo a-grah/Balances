@@ -11,6 +11,7 @@ struct GetPortfolioSummaryIntent: AppIntent {
         "Returns the current portfolio value and performance summary from Balances.",
         categoryName: "Portfolio"
     )
+    static let openAppWhenRun = true
 
     // No parameters — reads whatever is in the app's data store.
 
