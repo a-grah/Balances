@@ -37,6 +37,11 @@
 		86E35AA48163E34FBFB5FE56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B04B2273026590A440D27C9 /* Assets.xcassets */; };
 		8D2E3F4A5B6C7D8E9F0A1B2C /* Scripting/ScriptingSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D2E3F4A5B6C7D8E9F0A1B /* Scripting/ScriptingSupport.swift */; };
 		AF4A5B6C7D8E9F0A1B2C3D4E /* Balances.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 9E3F4A5B6C7D8E9F0A1B2C3D /* Balances.sdef */; };
+		0891833B7EC24A73A08FC86D /* Intents/IntentsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAB2957D81244FCB88B844D /* Intents/IntentsDataProvider.swift */; };
+		78ACAF70F2924E7AA86D92BA /* Intents/BalanceEntryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D364B46B468442D9E92C52C /* Intents/BalanceEntryEntity.swift */; };
+		1895A42F47A44A57B1822CFB /* Intents/AddBalanceEntryIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6466A8932C3A4B31A20F0077 /* Intents/AddBalanceEntryIntent.swift */; };
+		28E8B73C2E174FE8A8FAD17C /* Intents/GetPortfolioSummaryIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8A33DBF45543ADAE18E7E5 /* Intents/GetPortfolioSummaryIntent.swift */; };
+		ABF26817549E411EBBD4CE90 /* Intents/BalancesShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A12C0DB1324685A16ECE7A /* Intents/BalancesShortcuts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +77,11 @@
 		FA93C327463D4F5E9A1DD84C /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootView.swift"; sourceTree = "<group>"; };
 		2B80D41745B346E1B53EF73C /* SettingsLicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsLicenseView.swift"; sourceTree = "<group>"; };
 		7E1D2C3B4A5968F7E6D5C4B3 /* LicenseEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LicenseEntryView.swift"; sourceTree = "<group>"; };
+		CEAB2957D81244FCB88B844D /* IntentsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IntentsDataProvider.swift"; sourceTree = "<group>"; };
+		0D364B46B468442D9E92C52C /* BalanceEntryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BalanceEntryEntity.swift"; sourceTree = "<group>"; };
+		6466A8932C3A4B31A20F0077 /* AddBalanceEntryIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddBalanceEntryIntent.swift"; sourceTree = "<group>"; };
+		3B8A33DBF45543ADAE18E7E5 /* GetPortfolioSummaryIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GetPortfolioSummaryIntent.swift"; sourceTree = "<group>"; };
+		49A12C0DB1324685A16ECE7A /* BalancesShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BalancesShortcuts.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +121,7 @@
 				F47655696FADD8034DF690FF /* Model */,
 				3B584A608168441CBC356B9E /* Licensing */,
 				BA5B6C7D8E9F0A1B2C3D4E5F /* Scripting */,
+				3F23358C58EC43128E79345E /* Intents */,
 				D8AA556D97B214A15F0ECBDB /* Views */,
 				5FDC85C69B4BE2D240E61DD5 /* Resources */,
 				1507F021100E808DBE2FAA00 /* Info.plist */,
@@ -178,6 +189,18 @@
 				7C1D2E3F4A5B6C7D8E9F0A1B /* ScriptingSupport.swift */,
 			);
 			path = "Scripting";
+			sourceTree = "<group>";
+		};
+		3F23358C58EC43128E79345E /* Intents */ = {
+			isa = PBXGroup;
+			children = (
+				CEAB2957D81244FCB88B844D /* IntentsDataProvider.swift */,
+				0D364B46B468442D9E92C52C /* BalanceEntryEntity.swift */,
+				6466A8932C3A4B31A20F0077 /* AddBalanceEntryIntent.swift */,
+				3B8A33DBF45543ADAE18E7E5 /* GetPortfolioSummaryIntent.swift */,
+				49A12C0DB1324685A16ECE7A /* BalancesShortcuts.swift */,
+			);
+			path = "Intents";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,6 +301,11 @@
 				9F1E2D3C4B5A6978E0D1C2B3 /* Views/LicenseEntryView.swift in Sources */,
 				4F6EB2F7E93CECFC59644946 /* Balances.xcdatamodeld in Sources */,
 				8D2E3F4A5B6C7D8E9F0A1B2C /* Scripting/ScriptingSupport.swift in Sources */,
+				0891833B7EC24A73A08FC86D /* Intents/IntentsDataProvider.swift in Sources */,
+				78ACAF70F2924E7AA86D92BA /* Intents/BalanceEntryEntity.swift in Sources */,
+				1895A42F47A44A57B1822CFB /* Intents/AddBalanceEntryIntent.swift in Sources */,
+				28E8B73C2E174FE8A8FAD17C /* Intents/GetPortfolioSummaryIntent.swift in Sources */,
+				ABF26817549E411EBBD4CE90 /* Intents/BalancesShortcuts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

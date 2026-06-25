@@ -15,6 +15,8 @@ struct BalancesApp: App {
         let undo = UndoManager()
         undo.levelsOfUndo = 50
         ctx.undoManager = undo
+        // Register App Intents phrases with Siri and Spotlight.
+        BalancesShortcuts.updateAppShortcutParameters()
     }
 
     var body: some Scene {
