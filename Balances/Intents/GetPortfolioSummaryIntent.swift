@@ -15,7 +15,6 @@ struct GetPortfolioSummaryIntent: AppIntent {
 
     // No parameters — reads whatever is in the app's data store.
 
-    @MainActor
     func perform() async throws -> some IntentResult & ReturnsValue<Double> & ProvidesDialog {
         let summary = IntentsDataProvider.summary()
         let gainSign = summary.investmentGain >= 0 ? "+" : ""

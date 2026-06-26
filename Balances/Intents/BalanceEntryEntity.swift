@@ -42,6 +42,8 @@ struct BalanceEntryEntity: AppEntity {
 
     // MARK: - Init
 
+    /// Called from within a `performAndWait` block so managed-object
+    /// properties are accessed on the correct Core Data queue.
     init(from entry: BalanceEntry) {
         self.id = entry.id ?? UUID()
         self.date = entry.date ?? .distantPast
@@ -56,15 +58,12 @@ struct BalanceEntryEntity: AppEntity {
 
 struct BalanceEntryQuery: EntityQuery {
 
-    @MainActor
     func entities(for identifiers: [UUID]) async throws -> [BalanceEntryEntity] {
-        IntentsDataProvider.entries(withIDs: identifiers).map { BalanceEntryEntity(from: $0) }
+        IntentsDataProvider.entities(withIDs: identifiers)
     }
 
     /// Returns the most recent entries as suggestions in the Shortcuts picker.
-    @MainActor
     func suggestedEntities() async throws -> [BalanceEntryEntity] {
-        let entries = IntentsDataProvider.fetchEntries()
-        return entries.suffix(20).reversed().map { BalanceEntryEntity(from: $0) }
+        Array(IntentsDataProvider.allEntities().suffix(20).reversed())
     }
 }

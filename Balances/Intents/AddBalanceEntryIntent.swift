@@ -46,7 +46,6 @@ struct AddBalanceEntryIntent: AppIntent {
 
     // MARK: - Perform
 
-    @MainActor
     func perform() async throws -> some IntentResult & ReturnsValue<BalanceEntryEntity> & ProvidesDialog {
         let entryDate = date ?? Date()
         let entity = try IntentsDataProvider.addEntry(
