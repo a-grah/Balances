@@ -59,6 +59,15 @@ xcodebuild -project Balances.xcodeproj -scheme Balances -configuration Release \
 
 The built app is under `build/<config>/Balances.app`. To install for everyday use, copy it to `/Applications`.
 
+> **App Intents need a properly signed build.** The ad-hoc (`CODE_SIGN_IDENTITY="-"`) builds above run fine, but the App Intents daemon (`linkd`) rejects an ad-hoc bundle — it can't validate the bundle identity (`requiresValidatedBundle`), so Shortcuts/Siri/Spotlight fail with *"Shortcuts couldn't communicate with the app"* even while the app is running. For App-Intents testing, install a Developer ID-signed copy instead — notarization is **not** required for `linkd` validation:
+>
+> ```sh
+> SKIP_NOTARIZE=1 scripts/release.sh            # → signed dist/Balances.app
+> ditto dist/Balances.app /Applications/Balances.app
+> ```
+>
+> The real notarized release DMG is already Developer ID-signed, so shipped builds are unaffected.
+
 ## Data & storage
 
 - Data is stored in a **Core Data / SQLite** store inside the app's sandbox container:
