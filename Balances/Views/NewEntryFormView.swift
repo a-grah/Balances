@@ -1,5 +1,7 @@
 import SwiftUI
 import CoreData
+import AppKit
+import Combine
 
 /// The dashboard "NEW ENTRY" form. Adds a dated balance snapshot.
 struct NewEntryFormView: View {
@@ -11,6 +13,9 @@ struct NewEntryFormView: View {
     @FocusState private var focusedField: Field?
 
     @State private var dateText = Fmt.isoString(Date())
+    /// The last date this form filled in on its own. While `dateText` still matches it,
+    /// the field is untouched and free to roll forward as the calendar day changes.
+    @State private var autoDateText = Fmt.isoString(Date())
     @State private var balance = ""
     @State private var adjustment = ""
     @State private var transfers = ""
@@ -82,6 +87,21 @@ struct NewEntryFormView: View {
                     .disabled(balanceValue == nil || dateValue == nil)
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: .NSCalendarDayChanged).receive(on: RunLoop.main)) { _ in
+            refreshAutoDate()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
+            refreshAutoDate()
+        }
+    }
+
+    /// Advances an untouched date field to today (midnight rollover, wake from sleep,
+    /// or returning to the app after leaving it open overnight).
+    private func refreshAutoDate() {
+        let today = Fmt.isoString(Date())
+        guard today != autoDateText else { return }
+        if dateText == autoDateText { dateText = today }
+        autoDateText = today
     }
 
     private func field(_ label: String, text: Binding<String>, prompt: String, focus: Field, next: Field) -> some View {
@@ -120,6 +140,6 @@ struct NewEntryFormView: View {
 
     private func clear() {
         balance = ""; adjustment = ""; transfers = ""; note = ""
-        dateText = Fmt.isoString(Date()); errorMessage = nil
+        dateText = Fmt.isoString(Date()); autoDateText = dateText; errorMessage = nil
     }
 }
