@@ -5,9 +5,17 @@ import Charts
 /// Fills its container so it scales with the window.
 struct BalanceChartView: View {
     let points: [BalancePoint]
+    /// Simulated TSX benchmark, one point per year (see TSXModel.benchmarkSeries).
+    var benchmark: [BenchmarkPoint] = []
 
     @State private var range: DateRange = .all
     @State private var showAdjusted = false
+    @State private var showBenchmark = false
+
+    private var filteredBenchmark: [BenchmarkPoint] {
+        guard let start = range.startDate() else { return benchmark }
+        return benchmark.filter { $0.date >= start }
+    }
 
     private var filtered: [BalancePoint] {
         let base: [BalancePoint]
@@ -39,6 +47,12 @@ struct BalanceChartView: View {
                 Toggle("Adjusted", isOn: $showAdjusted)
                     .toggleStyle(.switch)
                     .help("Show balance with cash flows removed (investment-only)")
+                Toggle("TSX", isOn: $showBenchmark)
+                    .toggleStyle(.switch)
+                    .disabled(benchmark.isEmpty)
+                    .help(benchmark.isEmpty
+                          ? "Add yearly data on the TSX Comparison tab to plot the benchmark"
+                          : "Overlay the simulated TSX value, one point per year")
             }
 
             Picker("Range", selection: $range) {
@@ -91,6 +105,27 @@ struct BalanceChartView: View {
                     .foregroundStyle(.orange)
                     .lineStyle(StrokeStyle(lineWidth: 1.5, dash: [4, 3]))
                     .interpolationMethod(.linear)
+                }
+            }
+
+            if showBenchmark {
+                ForEach(filteredBenchmark) { p in
+                    LineMark(
+                        x: .value("Date", p.date),
+                        y: .value("TSX", p.value),
+                        series: .value("Series", "TSX")
+                    )
+                    .foregroundStyle(.purple)
+                    .interpolationMethod(.linear)
+
+                    // The benchmark is annual, so mark the points it is
+                    // actually defined at rather than implying a daily curve.
+                    PointMark(
+                        x: .value("Date", p.date),
+                        y: .value("TSX", p.value)
+                    )
+                    .foregroundStyle(.purple)
+                    .symbolSize(24)
                 }
             }
         }

@@ -121,6 +121,26 @@ struct TSXYearInput {
         if let label, !label.isEmpty { return label }
         return String(year)
     }
+
+    /// Calendar year this row covers. Partial-year rows are entered with
+    /// `year == 0` and carry only a label ("2026 YTD"), so fall back to the
+    /// first plausible four-digit run in it.
+    var calendarYear: Int? {
+        if year != 0 { return year }
+        guard let label else { return nil }
+        for token in label.split(whereSeparator: { !$0.isNumber }) where token.count == 4 {
+            if let v = Int(token), (1900...2200).contains(v) { return v }
+        }
+        return nil
+    }
+}
+
+/// A single point on the simulated-TSX benchmark series.
+struct BenchmarkPoint: Identifiable {
+    let id = UUID()
+    let date: Date
+    let value: Double
+    let name: String
 }
 
 struct TSXRow: Identifiable {
@@ -156,6 +176,28 @@ enum TSXModel {
             prev = sim
         }
         return rows
+    }
+
+    /// Places each year's simulated value on the timeline so the benchmark can
+    /// be drawn against the balance series. A year's point sits on its last
+    /// balance entry — the same entry `actualEnd` is read from — so the two
+    /// series meet at the dates they actually describe. Years with no entries
+    /// fall back to Dec 31, and rows with no resolvable year are dropped.
+    static func benchmarkSeries(years: [TSXYearInput], entries: [StatsInput]) -> [BenchmarkPoint] {
+        let cal = Calendar.current
+        var lastEntryOfYear: [Int: Date] = [:]
+        for e in entries {
+            let y = cal.component(.year, from: e.date)
+            if let seen = lastEntryOfYear[y], seen >= e.date { continue }
+            lastEntryOfYear[y] = e.date
+        }
+        return simulate(years).compactMap { row in
+            guard let year = row.input.calendarYear,
+                  let date = lastEntryOfYear[year]
+                    ?? cal.date(from: DateComponents(year: year, month: 12, day: 31))
+            else { return nil }
+            return BenchmarkPoint(date: date, value: row.simulated, name: row.input.displayName)
+        }
     }
 
     /// Builds the Your Portfolio vs TSX Equivalent vs Difference summary.
