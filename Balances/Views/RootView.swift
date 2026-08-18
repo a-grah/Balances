@@ -1,15 +1,19 @@
 import SwiftUI
 
 /// Routes the app's window content based on `LicensingState`:
-/// - `.licensed` / `.trial` -> the normal app UI (with an unobtrusive trial banner).
+/// - `.licensed` / `.unrestricted` -> the normal app UI.
+/// - `.trial` -> the normal app UI with an unobtrusive trial banner.
 /// - `.blocked` -> a non-dismissable licensing screen, replacing the entire UI.
+///
+/// App Store builds are always `.unrestricted`, so only the first branch is
+/// ever reachable there (see `Distribution`).
 struct RootView: View {
     @Environment(LicensingState.self) private var licensing
     @Environment(\.openWindow) private var openWindow
 
     var body: some View {
         switch licensing.status {
-        case .licensed:
+        case .licensed, .unrestricted:
             ContentView()
 
         case .trial(let daysLeft):

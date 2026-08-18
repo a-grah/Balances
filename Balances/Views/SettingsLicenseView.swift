@@ -62,6 +62,12 @@ struct SettingsLicenseView: View {
                      destination: LicensingState.purchaseURL)
                     .font(.callout)
             }
+
+        case .unrestricted:
+            // Unreachable: App Store builds do not create the Settings scene
+            // that hosts this view (see BalancesApp).
+            Label("Licensed", systemImage: "checkmark.seal.fill")
+                .foregroundStyle(.green)
         }
     }
 }

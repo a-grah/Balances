@@ -10,10 +10,15 @@ final class LicensingState {
         case licensed(LicenseVerifier.LicenseInfo)
         case trial(daysLeft: Int)
         case blocked
+        /// This build does no licensing at all (App Store) — the app is simply
+        /// unlocked, with no trial clock and no key to enter.
+        case unrestricted
 
         var isLicensed: Bool {
-            if case .licensed = self { return true }
-            return false
+            switch self {
+            case .licensed, .unrestricted: return true
+            case .trial, .blocked: return false
+            }
         }
     }
 
@@ -34,6 +39,13 @@ final class LicensingState {
     /// signature is checked again, never just a cached "isLicensed" flag); only if there is no
     /// valid license do we fall back to the trial bookkeeping.
     func refresh() {
+        // App Store builds never touch the Keychain or start a trial clock:
+        // there is nothing to verify and nothing to expire.
+        guard Distribution.requiresLicense else {
+            status = .unrestricted
+            return
+        }
+
         if let info = store.verifiedLicense() {
             status = .licensed(info)
             return

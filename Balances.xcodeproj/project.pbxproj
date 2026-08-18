@@ -42,6 +42,43 @@
 		1895A42F47A44A57B1822CFB /* Intents/AddBalanceEntryIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6466A8932C3A4B31A20F0077 /* Intents/AddBalanceEntryIntent.swift */; };
 		28E8B73C2E174FE8A8FAD17C /* Intents/GetPortfolioSummaryIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8A33DBF45543ADAE18E7E5 /* Intents/GetPortfolioSummaryIntent.swift */; };
 		ABF26817549E411EBBD4CE90 /* Intents/BalancesShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A12C0DB1324685A16ECE7A /* Intents/BalancesShortcuts.swift */; };
+		AD0000000000000000000002 /* Distribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000001 /* Distribution.swift */; };
+		AD0000000000000000000003 /* BalancesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CB6B2AA09762F03E306386; };
+		AD0000000000000000000004 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355B76CB7451179291173223; };
+		AD0000000000000000000005 /* Distribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000001; };
+		AD0000000000000000000006 /* Model/CSVPorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6320912DFB5F39AF2FF6196; };
+		AD0000000000000000000007 /* Model/CoreDataAdapters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E364FDE4A0F606A728FC028; };
+		AD0000000000000000000008 /* Model/DateRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3D77AE4BA7567E82A05D0E; };
+		AD0000000000000000000009 /* Model/Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76AAE4BAFD755A247486F53; };
+		AD000000000000000000000A /* Model/PortfolioStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A57458DE30A67FB200E57B; };
+		AD000000000000000000000B /* Model/SeedImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F25C887BB4C2D19641F3460; };
+		AD000000000000000000000C /* Views/BalanceChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F57DD3E61825739A8D172A3; };
+		AD000000000000000000000D /* Views/BalancesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F07F329B2935E83C869CD5; };
+		AD000000000000000000000E /* Views/ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7627741053ECD9EBC54BB2E; };
+		AD000000000000000000000F /* Views/DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE37AAF695C983F816FEB9ED; };
+		AD0000000000000000000010 /* Views/NewEntryFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6F76E31AD44C884EA4A75B; };
+		AD0000000000000000000011 /* Views/StatsPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DB0A406A92F466307193C4; };
+		AD0000000000000000000012 /* Views/TSXComparisonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA6014146D4C9C8E43A0D31; };
+		AD0000000000000000000013 /* Licensing/KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3DF09F76B042FA9768EBAE; };
+		AD0000000000000000000014 /* Licensing/LicenseVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80F5D08E8E14E4590DE56CE; };
+		AD0000000000000000000015 /* Licensing/LicenseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6B3E73B87D4A32A61C1262; };
+		AD0000000000000000000016 /* Licensing/LicensingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFDB2D5ADF04C8CAD5A4AFB; };
+		AD0000000000000000000017 /* Views/LicenseEntryControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485B67293F91472CBC43FE7C; };
+		AD0000000000000000000018 /* Views/LicensingGateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022580A411EB45FA92AD379B; };
+		AD0000000000000000000019 /* Views/RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93C327463D4F5E9A1DD84C; };
+		AD000000000000000000001A /* Views/SettingsLicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B80D41745B346E1B53EF73C; };
+		AD000000000000000000001B /* Views/LicenseEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D2C3B4A5968F7E6D5C4B3; };
+		AD000000000000000000001C /* Balances.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AC83687B63FD60BD00BB3ADB; };
+		AD000000000000000000001D /* Scripting/ScriptingSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D2E3F4A5B6C7D8E9F0A1B; };
+		AD000000000000000000001E /* Intents/IntentsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAB2957D81244FCB88B844D; };
+		AD000000000000000000001F /* Intents/BalanceEntryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D364B46B468442D9E92C52C; };
+		AD0000000000000000000020 /* Intents/AddBalanceEntryIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6466A8932C3A4B31A20F0077; };
+		AD0000000000000000000021 /* Intents/GetPortfolioSummaryIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8A33DBF45543ADAE18E7E5; };
+		AD0000000000000000000022 /* Intents/BalancesShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A12C0DB1324685A16ECE7A; };
+		AD0000000000000000000023 /* Resources/balances_seed.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B67435EA965ED34EAAC3606; };
+		AD0000000000000000000024 /* Resources/tsx_seed.json in Resources */ = {isa = PBXBuildFile; fileRef = 0D764778ADA9DE415A6C2772; };
+		AD0000000000000000000025 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B04B2273026590A440D27C9; };
+		AD0000000000000000000026 /* Balances.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 9E3F4A5B6C7D8E9F0A1B2C3D; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,10 +119,19 @@
 		6466A8932C3A4B31A20F0077 /* AddBalanceEntryIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddBalanceEntryIntent.swift"; sourceTree = "<group>"; };
 		3B8A33DBF45543ADAE18E7E5 /* GetPortfolioSummaryIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GetPortfolioSummaryIntent.swift"; sourceTree = "<group>"; };
 		49A12C0DB1324685A16ECE7A /* BalancesShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BalancesShortcuts.swift"; sourceTree = "<group>"; };
+		AD0000000000000000000001 /* Distribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Distribution.swift"; sourceTree = "<group>"; };
+		AD000000000000000000002A /* Balances.app (App Store) */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Balances.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		CF5BDB0BEAFE176F9629192A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD0000000000000000000029 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -107,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				38A007151ABE87CC01A5B6E9 /* Balances.app */,
+				AD000000000000000000002A /* Balances.app (App Store) */,
 			);
 			name = "Products";
 			sourceTree = "<group>";
@@ -116,6 +163,7 @@
 			children = (
 				96CB6B2AA09762F03E306386 /* BalancesApp.swift */,
 				355B76CB7451179291173223 /* Persistence.swift */,
+				AD0000000000000000000001 /* Distribution.swift */,
 				AC83687B63FD60BD00BB3ADB /* Balances.xcdatamodeld */,
 				5B04B2273026590A440D27C9 /* Assets.xcassets */,
 				F47655696FADD8034DF690FF /* Model */,
@@ -223,6 +271,23 @@
 			productReference = 38A007151ABE87CC01A5B6E9 /* Balances.app */;
 			productType = "com.apple.product-type.application";
 		};
+		AD000000000000000000002E /* Balances (App Store) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD000000000000000000002D /* Build configuration list for PBXNativeTarget "Balances (App Store)" */;
+			buildPhases = (
+				AD0000000000000000000027 /* Sources */,
+				AD0000000000000000000029 /* Frameworks */,
+				AD0000000000000000000028 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Balances (App Store)";
+			productName = "Balances";
+			productReference = AD000000000000000000002A /* Balances.app (App Store) */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -234,6 +299,9 @@
 				LastUpgradeCheck = 2650;
 				TargetAttributes = {
 					0E8A3AD980EC179856012B7E = {
+						CreatedOnToolsVersion = 26.5;
+					};
+					AD000000000000000000002E = {
 						CreatedOnToolsVersion = 26.5;
 					};
 				};
@@ -252,6 +320,7 @@
 			projectRoot = "";
 			targets = (
 				0E8A3AD980EC179856012B7E /* Balances */,
+				AD000000000000000000002E /* Balances (App Store) */,
 			);
 		};
 /* End PBXProject section */
@@ -268,6 +337,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AD0000000000000000000028 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD0000000000000000000023 /* Resources/balances_seed.json in Resources */,
+				AD0000000000000000000024 /* Resources/tsx_seed.json in Resources */,
+				AD0000000000000000000025 /* Assets.xcassets in Resources */,
+				AD0000000000000000000026 /* Balances.sdef in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -277,6 +357,7 @@
 			files = (
 				1F10BDD8DF8B64F131A6C37E /* BalancesApp.swift in Sources */,
 				52DBA75718417C6077F87C4D /* Persistence.swift in Sources */,
+				AD0000000000000000000002 /* Distribution.swift in Sources */,
 				65585A720BDFA1A81106ED00 /* Model/CSVPorter.swift in Sources */,
 				1CA0F31AAB48B282688B0EFF /* Model/CoreDataAdapters.swift in Sources */,
 				2EB3C27214F06C38FC56CCAC /* Model/DateRange.swift in Sources */,
@@ -306,6 +387,45 @@
 				1895A42F47A44A57B1822CFB /* Intents/AddBalanceEntryIntent.swift in Sources */,
 				28E8B73C2E174FE8A8FAD17C /* Intents/GetPortfolioSummaryIntent.swift in Sources */,
 				ABF26817549E411EBBD4CE90 /* Intents/BalancesShortcuts.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD0000000000000000000027 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD0000000000000000000003 /* BalancesApp.swift in Sources */,
+				AD0000000000000000000004 /* Persistence.swift in Sources */,
+				AD0000000000000000000005 /* Distribution.swift in Sources */,
+				AD0000000000000000000006 /* Model/CSVPorter.swift in Sources */,
+				AD0000000000000000000007 /* Model/CoreDataAdapters.swift in Sources */,
+				AD0000000000000000000008 /* Model/DateRange.swift in Sources */,
+				AD0000000000000000000009 /* Model/Formatters.swift in Sources */,
+				AD000000000000000000000A /* Model/PortfolioStats.swift in Sources */,
+				AD000000000000000000000B /* Model/SeedImporter.swift in Sources */,
+				AD000000000000000000000C /* Views/BalanceChartView.swift in Sources */,
+				AD000000000000000000000D /* Views/BalancesTableView.swift in Sources */,
+				AD000000000000000000000E /* Views/ContentView.swift in Sources */,
+				AD000000000000000000000F /* Views/DashboardView.swift in Sources */,
+				AD0000000000000000000010 /* Views/NewEntryFormView.swift in Sources */,
+				AD0000000000000000000011 /* Views/StatsPanelView.swift in Sources */,
+				AD0000000000000000000012 /* Views/TSXComparisonView.swift in Sources */,
+				AD0000000000000000000013 /* Licensing/KeychainStore.swift in Sources */,
+				AD0000000000000000000014 /* Licensing/LicenseVerifier.swift in Sources */,
+				AD0000000000000000000015 /* Licensing/LicenseStore.swift in Sources */,
+				AD0000000000000000000016 /* Licensing/LicensingState.swift in Sources */,
+				AD0000000000000000000017 /* Views/LicenseEntryControls.swift in Sources */,
+				AD0000000000000000000018 /* Views/LicensingGateView.swift in Sources */,
+				AD0000000000000000000019 /* Views/RootView.swift in Sources */,
+				AD000000000000000000001A /* Views/SettingsLicenseView.swift in Sources */,
+				AD000000000000000000001B /* Views/LicenseEntryView.swift in Sources */,
+				AD000000000000000000001C /* Balances.xcdatamodeld in Sources */,
+				AD000000000000000000001D /* Scripting/ScriptingSupport.swift in Sources */,
+				AD000000000000000000001E /* Intents/IntentsDataProvider.swift in Sources */,
+				AD000000000000000000001F /* Intents/BalanceEntryEntity.swift in Sources */,
+				AD0000000000000000000020 /* Intents/AddBalanceEntryIntent.swift in Sources */,
+				AD0000000000000000000021 /* Intents/GetPortfolioSummaryIntent.swift in Sources */,
+				AD0000000000000000000022 /* Intents/BalancesShortcuts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +526,51 @@
 			};
 			name = "Release";
 		};
+		AD000000000000000000002B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Balances/Balances.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 7;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Balances/Info.plist";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MARKETING_VERSION = 1.6;
+				PRODUCT_BUNDLE_IDENTIFIER = "ca.bluepill.Balances";
+				PRODUCT_NAME = "Balances";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "APPSTORE $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = "Debug";
+		};
+		AD000000000000000000002C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Balances/Balances.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 7;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Balances/Info.plist";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MARKETING_VERSION = 1.6;
+				PRODUCT_BUNDLE_IDENTIFIER = "ca.bluepill.Balances";
+				PRODUCT_NAME = "Balances";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "APPSTORE $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = "Release";
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -423,6 +588,15 @@
 			buildConfigurations = (
 				33F0C6CCEF74F8BF16BB4617 /* Debug */,
 				A7FBA4F38FC1C6EE9D9D943B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AD000000000000000000002D /* Build configuration list for PBXNativeTarget "Balances (App Store)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD000000000000000000002B /* Debug */,
+				AD000000000000000000002C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

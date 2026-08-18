@@ -44,6 +44,12 @@ struct BalancesApp: App {
             }
         }
 
+        // The Settings window and the license-entry window exist only to serve
+        // licensing, so the App Store build ships without either. This is the
+        // one place that has to branch at compile time rather than on
+        // `Distribution.requiresLicense`: SceneBuilder does not accept a
+        // runtime `if`.
+        #if !APPSTORE
         Settings {
             SettingsLicenseView()
                 .environment(licensing)
@@ -55,6 +61,7 @@ struct BalancesApp: App {
                 .environment(licensing)
         }
         .windowResizability(.contentSize)
+        #endif
     }
 
     private func performUndo() {
@@ -83,6 +90,11 @@ struct BalancesApp: App {
             licenseText = daysLeft == 1 ? "Trial: 1 day left" : "Trial: \(daysLeft) days left"
         case .blocked:
             licenseText = "Trial expired"
+        case .unrestricted:
+            // Nothing to say about licensing in an App Store build; show the
+            // stock About panel.
+            NSApp.orderFrontStandardAboutPanel(options: [:])
+            return
         }
 
         let paragraphStyle = NSMutableParagraphStyle()
