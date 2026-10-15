@@ -14,6 +14,7 @@ enum Fmt {
         let f = NumberFormatter()
         f.numberStyle = .currency
         f.maximumFractionDigits = 2
+        f.currencyCode = "CAD"
         f.currencySymbol = "$"
         return f
     }()

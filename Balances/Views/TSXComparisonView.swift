@@ -161,7 +161,7 @@ struct TSXComparisonView: View {
         guard let id = selection, let y = years.first(where: { $0.id == id }) else { return }
         context.delete(y)
         selection = nil
-        try? context.save()
+        context.saveLoggingErrors()
     }
 }
 
@@ -202,11 +202,18 @@ struct TSXYearEditorView: View {
                 TextField("0", text: $actualEnd).textFieldStyle(.roundedBorder)
             }
 
+            if !isValid {
+                Text("Year must be whole digits; the rest must be plain finite numbers.")
+                    .foregroundStyle(.red).font(.caption)
+            }
+
             HStack {
                 Button("Cancel", role: .cancel) { cancel() }
                     .keyboardShortcut(.cancelAction)
                 Spacer()
-                Button("Save") { save() }.keyboardShortcut(.defaultAction)
+                Button("Save") { save() }
+                    .keyboardShortcut(.defaultAction)
+                    .disabled(!isValid)
             }
         }
         .padding()
@@ -225,15 +232,34 @@ struct TSXYearEditorView: View {
         loaded = true
     }
 
+    /// Blank means zero; anything else has to be a finite number. Bare `Double()`
+    /// accepts "inf"/"nan", and one of those poisons TSXModel.simulate, the
+    /// comparison table, and the chart for every row after it.
+    private func number(_ s: String) -> Double? {
+        let t = s.trimmingCharacters(in: .whitespaces)
+        return t.isEmpty ? 0 : Fmt.finiteNumber(t)
+    }
+
+    private var isValid: Bool {
+        let y = yearText.trimmingCharacters(in: .whitespaces)
+        guard y.isEmpty || Int32(y) != nil else { return false }
+        return [tsxReturn, netCashFlows, actualStart, actualEnd].allSatisfy { number($0) != nil }
+    }
+
     private func save() {
+        guard isValid,
+              let ret = number(tsxReturn),
+              let flows = number(netCashFlows),
+              let start = number(actualStart),
+              let end = number(actualEnd) else { return }
         if year.id == nil { year.id = UUID() }
         year.label = label.isEmpty ? nil : label
         year.year = Int32(yearText.trimmingCharacters(in: .whitespaces)) ?? 0
-        year.tsxReturn = Double(tsxReturn.trimmingCharacters(in: .whitespaces)) ?? 0
-        year.netCashFlows = Double(netCashFlows.trimmingCharacters(in: .whitespaces)) ?? 0
-        year.actualStart = Double(actualStart.trimmingCharacters(in: .whitespaces)) ?? 0
-        year.actualEnd = Double(actualEnd.trimmingCharacters(in: .whitespaces)) ?? 0
-        try? context.save()
+        year.tsxReturn = ret
+        year.netCashFlows = flows
+        year.actualStart = start
+        year.actualEnd = end
+        context.saveLoggingErrors()
         onClose()
     }
 

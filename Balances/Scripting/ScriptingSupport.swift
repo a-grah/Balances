@@ -114,7 +114,7 @@ extension NSApplication {
     /// The commit point for `make new balance entry`: the object is already
     /// inserted into the context (see above), so just persist it.
     @objc func insertObject(_ entry: BalanceEntry, inBalanceEntriesAtIndex index: Int) {
-        try? viewContext.save()
+        viewContext.saveLoggingErrors()
     }
 }
 

@@ -125,7 +125,7 @@ struct BalancesTableView: View {
             }
         }
         selection.removeAll()
-        try? context.save()
+        context.saveLoggingErrors()
     }
 
     private func importCSV() {
@@ -213,7 +213,7 @@ struct EntryEditorView: View {
         entry.adjustment = Fmt.finiteNumber(adjustment) ?? 0
         entry.transfers = Fmt.finiteNumber(transfers) ?? 0
         entry.note = note.isEmpty ? nil : note
-        try? context.save()
+        context.saveLoggingErrors()
         onClose()
     }
 

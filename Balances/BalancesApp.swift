@@ -68,14 +68,14 @@ struct BalancesApp: App {
         let ctx = persistence.container.viewContext
         guard ctx.undoManager?.canUndo == true else { return }
         ctx.undoManager?.undo()
-        try? ctx.save()
+        ctx.saveLoggingErrors()
     }
 
     private func performRedo() {
         let ctx = persistence.container.viewContext
         guard ctx.undoManager?.canRedo == true else { return }
         ctx.undoManager?.redo()
-        try? ctx.save()
+        ctx.saveLoggingErrors()
     }
 
     /// Shows the standard "About Balances" panel with the current licensing status appended

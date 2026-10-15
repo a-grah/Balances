@@ -16,7 +16,7 @@ struct PersistenceController {
             e.balance = 100_000 + Double(i) * 5_000
             e.adjustment = i % 3 == 0 ? 2_000 : 0
         }
-        try? ctx.save()
+        ctx.saveLoggingErrors()
         return controller
     }()
 
@@ -37,13 +37,22 @@ struct PersistenceController {
     }
 
     func save() {
-        let ctx = container.viewContext
-        guard ctx.hasChanges else { return }
+        container.viewContext.saveLoggingErrors()
+    }
+}
+
+extension NSManagedObjectContext {
+    /// Saves pending changes, logging a failure instead of discarding it.
+    ///
+    /// Preferred over `try? save()`: the editors dismiss themselves immediately
+    /// after saving, so a swallowed error reads to the user as an accepted edit.
+    func saveLoggingErrors(_ site: String = #function) {
+        guard hasChanges else { return }
         do {
-            try ctx.save()
+            try save()
         } catch {
             let nsError = error as NSError
-            NSLog("Core Data save error: \(nsError), \(nsError.userInfo)")
+            NSLog("Core Data save error in \(site): \(nsError), \(nsError.userInfo)")
         }
     }
 }

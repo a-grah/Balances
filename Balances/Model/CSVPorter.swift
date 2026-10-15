@@ -55,6 +55,23 @@ enum CSVPorter {
         return negate ? -v : v
     }
 
+    /// Plain decimal text for a CSV cell. `String(Double)` writes "1242000.0" for whole
+    /// dollars and switches to scientific notation ("1e+21") for large values, which
+    /// spreadsheets and our own `parseNumber` then read back wrong.
+    private static let csvNumber: NumberFormatter = {
+        let f = NumberFormatter()
+        f.numberStyle = .decimal
+        f.locale = Locale(identifier: "en_US_POSIX")
+        f.usesGroupingSeparator = false
+        f.maximumFractionDigits = 2
+        return f
+    }()
+
+    private static func numberString(_ v: Double) -> String {
+        guard v.isFinite, let s = csvNumber.string(from: NSNumber(value: v)) else { return "0" }
+        return s
+    }
+
     // MARK: Export
 
     static func csvString(for entries: [BalanceEntry]) -> String {
@@ -64,9 +81,9 @@ enum CSVPorter {
             let date = dateFormatter.string(from: e.date ?? Date())
             let fields = [
                 date,
-                String(e.balance),
-                String(e.adjustment),
-                e.transfers == 0 ? "" : String(e.transfers),
+                numberString(e.balance),
+                numberString(e.adjustment),
+                e.transfers == 0 ? "" : numberString(e.transfers),
                 escape(e.note ?? "")
             ]
             lines.append(fields.joined(separator: ","))
@@ -94,6 +111,12 @@ enum CSVPorter {
     private static func escape(_ s: String) -> String {
         var value = s
         if let first = value.first, Self.formulaTriggers.contains(first) {
+            value = "'" + value
+        } else if value.hasPrefix("'"), let second = value.dropFirst().first,
+                  Self.formulaTriggers.contains(second) {
+            // A note the user actually typed as "'=..." looks exactly like our own
+            // escaping; double the quote so import can strip precisely one and the
+            // round trip stays lossless.
             value = "'" + value
         }
         guard value.contains(",") || value.contains("\"") || value.contains("\n") else { return value }
@@ -191,7 +214,14 @@ enum CSVPorter {
     }
 
     private static func unescape(_ s: String) -> String? {
-        let t = s.trimmingCharacters(in: .whitespaces)
+        var t = s.trimmingCharacters(in: .whitespaces)
+        // Undo the leading quote `escape` adds to formula-leading notes, so an
+        // export -> import round trip returns the note unchanged. Only when the next
+        // character is actually a trigger -- a note that genuinely starts with an
+        // apostrophe must survive intact.
+        if t.hasPrefix("'"), let second = t.dropFirst().first, formulaTriggers.contains(second) {
+            t = String(t.dropFirst())
+        }
         return t.isEmpty ? nil : t
     }
 

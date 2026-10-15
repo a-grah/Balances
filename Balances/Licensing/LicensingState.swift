@@ -1,3 +1,4 @@
+import AppKit
 import Foundation
 import Observation
 
@@ -29,10 +30,31 @@ final class LicensingState {
 
     private let store: LicenseStore
 
+    @ObservationIgnored private var clockObservers: [NSObjectProtocol] = []
+
     init(store: LicenseStore = LicenseStore()) {
         self.store = store
         self.status = .blocked
         refresh()
+        observeClockChanges()
+    }
+
+    deinit {
+        clockObservers.forEach { NotificationCenter.default.removeObserver($0) }
+    }
+
+    /// Licenses expire and trials roll over on a date boundary, so a session left running
+    /// overnight (or asleep) would otherwise keep showing yesterday's status until relaunch.
+    /// App Store builds have no clock to watch.
+    private func observeClockChanges() {
+        guard Distribution.requiresLicense else { return }
+        let center = NotificationCenter.default
+        for name in [Notification.Name.NSCalendarDayChanged, NSApplication.didBecomeActiveNotification] {
+            let token = center.addObserver(forName: name, object: nil, queue: .main) { [weak self] _ in
+                self?.refresh()
+            }
+            clockObservers.append(token)
+        }
     }
 
     /// Re-derives `status` from scratch. A stored license token is always re-verified (its

@@ -45,7 +45,7 @@ struct BalanceEntryEntity: AppEntity {
     /// Called from within a `performAndWait` block so managed-object
     /// properties are accessed on the correct Core Data queue.
     init(from entry: BalanceEntry) {
-        self.id = entry.id ?? UUID()
+        self.id = entry.stableID
         self.date = entry.date ?? .distantPast
         self.balance = entry.balance
         self.adjustment = entry.adjustment
