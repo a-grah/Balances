@@ -74,7 +74,7 @@ The built app is under `build/<config>/Balances.app`. To install for everyday us
   `~/Library/Containers/ca.bluepill.Balances/Data/Library/Application Support/Balances/Balances.sqlite`
 - On first launch the store is seeded from bundled JSON in `Balances/Resources/` (`balances_seed.json`, `tsx_seed.json`) if present.
 
-> **Privacy note:** the seed JSON contains real portfolio data and is **git-ignored** (not tracked in this repository). A fresh clone has no seed files, so the app launches with an empty store — enter data manually or import a CSV.
+> The bundled seed JSON is a small **synthetic sample** so a fresh build has something to show. To start empty instead, replace each file with `[]` before building, or delete the sample rows in the app.
 
 ## Project structure
 
@@ -97,11 +97,15 @@ Balances/
     DashboardView.swift, NewEntryFormView.swift, StatsPanelView.swift, BalanceChartView.swift
     BalancesTableView.swift   # editable table + CSV + editor sheet
     TSXComparisonView.swift   # yearly benchmark + comparison summary
-  Resources/                  # seed JSON (git-ignored)
+  Resources/                  # synthetic sample seed JSON
 ```
 
 ## Notes
 
 - **TSX simulation** intentionally mirrors the source spreadsheet's chaining (the second year re-bases to its own actual start, then later years compound), so the simulated value matches the original sheet. See `TSXModel.simulate` in `Model/PortfolioStats.swift`.
-- The app is **ad-hoc signed** for personal use. Sharing it with others would require Developer ID signing + notarization to avoid Gatekeeper prompts.
+- The plain `xcodebuild` commands above produce an **ad-hoc signed** build for personal use. `scripts/release.sh` produces the Developer ID-signed, notarized DMG; it needs your own signing identity, team ID, and notarytool profile.
+
+## License
+
+Balances is released under the [MIT License](LICENSE).
 

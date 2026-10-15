@@ -15,16 +15,6 @@ jobs:
       - name: Show Xcode version
         run: xcodebuild -version
 
-      # The seed JSON holds private data and is git-ignored, so it is not in
-      # the repository. The app bundle references these resources, so create
-      # empty placeholders to let the build's resource-copy step succeed.
-      # (SeedImporter treats an empty "[]" file as "nothing to seed".)
-      - name: Create placeholder seed data
-        run: |
-          mkdir -p Balances/Resources
-          [ -f Balances/Resources/balances_seed.json ] || echo '[]' > Balances/Resources/balances_seed.json
-          [ -f Balances/Resources/tsx_seed.json ] || echo '[]' > Balances/Resources/tsx_seed.json
-
       - name: Build
         run: |
           xcodebuild -project Balances.xcodeproj -scheme Balances \

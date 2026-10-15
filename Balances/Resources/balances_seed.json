@@ -1,0 +1,266 @@
+[
+  {
+    "date": "2025-12-19",
+    "balance": 57000.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2025-12-05",
+    "balance": 56600.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2025-11-21",
+    "balance": 56100.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2025-11-07",
+    "balance": 55200.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2025-10-24",
+    "balance": 53800.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2025-10-10",
+    "balance": 54100.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2025-09-26",
+    "balance": 53000.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2025-09-12",
+    "balance": 52200.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2025-08-29",
+    "balance": 52400.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2025-08-15",
+    "balance": 52600.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2025-08-01",
+    "balance": 53000.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2025-07-18",
+    "balance": 51800.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2025-07-04",
+    "balance": 51300.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2025-06-20",
+    "balance": 51200.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2025-06-06",
+    "balance": 50300.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2025-05-23",
+    "balance": 50100.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2025-05-09",
+    "balance": 49500.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2025-04-25",
+    "balance": 49700.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2025-04-11",
+    "balance": 48600.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2025-03-28",
+    "balance": 49000.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2025-03-14",
+    "balance": 48000.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2025-02-28",
+    "balance": 48000.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2025-02-14",
+    "balance": 48800.0,
+    "adjustment": -1800.0,
+    "transfers": 1.8,
+    "note": "Sample data \u2014 withdrawal for taxes"
+  },
+  {
+    "date": "2025-01-31",
+    "balance": 50300.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2025-01-17",
+    "balance": 50100.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2025-01-03",
+    "balance": 50700.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2024-12-20",
+    "balance": 50400.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2024-12-06",
+    "balance": 49600.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2024-11-22",
+    "balance": 49700.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2024-11-08",
+    "balance": 49200.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2024-10-25",
+    "balance": 50000.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2024-10-11",
+    "balance": 50200.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2024-09-27",
+    "balance": 51100.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2024-09-13",
+    "balance": 52000.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2024-08-30",
+    "balance": 51800.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2024-08-16",
+    "balance": 50500.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2024-08-02",
+    "balance": 50900.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2024-07-19",
+    "balance": 51000.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2024-07-05",
+    "balance": 51600.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2024-06-21",
+    "balance": 52400.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2024-06-07",
+    "balance": 52500.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2024-05-24",
+    "balance": 51400.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2024-05-10",
+    "balance": 52300.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2024-04-26",
+    "balance": 51700.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2024-04-12",
+    "balance": 51500.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2024-03-29",
+    "balance": 52300.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2024-03-15",
+    "balance": 51400.0,
+    "adjustment": 2500.0,
+    "transfers": 2.5,
+    "note": "Sample data \u2014 quarterly contribution"
+  },
+  {
+    "date": "2024-03-01",
+    "balance": 49000.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2024-02-16",
+    "balance": 49900.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2024-02-02",
+    "balance": 50500.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2024-01-19",
+    "balance": 49700.0,
+    "adjustment": 0.0
+  },
+  {
+    "date": "2024-01-05",
+    "balance": 50300.0,
+    "adjustment": 0.0
+  }
+]

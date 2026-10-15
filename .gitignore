@@ -14,9 +14,10 @@ xcuserdata/
 .build/
 .swiftpm/
 
-# Private data — seeded portfolio history (kept on disk, never tracked)
-Balances/Resources/balances_seed.json
-Balances/Resources/tsx_seed.json
+# Private data — the real portfolio history, kept on disk and never tracked.
+# The seed JSON that actually ships (Balances/Resources/*_seed.json) is a small
+# synthetic sample and IS tracked; never overwrite it with the files below.
+PrivateData/
 
 # Misc
 *.hmap
