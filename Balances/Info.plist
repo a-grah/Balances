@@ -25,7 +25,7 @@
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>© 2026 Adrian Grah. All rights reserved.</string>
+	<string>© 2026 Adrian Grah</string>
 	<key>NSMainStoryboardFile</key>
 	<string></string>
 	<key>NSPrincipalClass</key>
@@ -34,5 +34,11 @@
 	<true/>
 	<key>OSAScriptingDefinition</key>
 	<string>Balances.sdef</string>
+	<key>SUEnableInstallerLauncherService</key>
+	<true/>
+	<key>SUFeedURL</key>
+	<string>https://github.com/a-grah/Balances/releases/latest/download/appcast.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>XrBtSq4v539abjmjia7r68et2we+M3EKI2PTvIhM5/U=</string>
 </dict>
 </plist>

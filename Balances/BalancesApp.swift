@@ -1,11 +1,9 @@
-import AppKit
 import SwiftUI
 
 @main
 struct BalancesApp: App {
     let persistence = PersistenceController.shared
-    @State private var licensing = LicensingState()
-    @Environment(\.openWindow) private var openWindow
+    @State private var updater = Updater.shared
 
     init() {
         let ctx = persistence.container.viewContext
@@ -21,20 +19,15 @@ struct BalancesApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootView()
-                .environment(licensing)
+            ContentView()
                 .environment(\.managedObjectContext, persistence.container.viewContext)
                 .frame(minWidth: 960, minHeight: 640)
         }
         .commands {
             SidebarCommands()
-            CommandGroup(replacing: .appInfo) {
-                Button("About Balances") { showAboutPanel() }
-            }
             CommandGroup(after: .appInfo) {
-                if !licensing.status.isLicensed {
-                    Button("Enter License Key…") { openWindow(id: "license-entry") }
-                }
+                Button("Check for Updates…") { updater.checkForUpdates() }
+                    .disabled(!updater.canCheckForUpdates)
             }
             CommandGroup(replacing: .undoRedo) {
                 Button("Undo") { performUndo() }
@@ -44,24 +37,10 @@ struct BalancesApp: App {
             }
         }
 
-        // The Settings window and the license-entry window exist only to serve
-        // licensing, so the App Store build ships without either. This is the
-        // one place that has to branch at compile time rather than on
-        // `Distribution.requiresLicense`: SceneBuilder does not accept a
-        // runtime `if`.
-        #if !APPSTORE
         Settings {
-            SettingsLicenseView()
-                .environment(licensing)
-                .frame(width: 460)
+            SettingsView()
+                .frame(width: 420)
         }
-
-        Window("Enter License Key", id: "license-entry") {
-            LicenseEntryView()
-                .environment(licensing)
-        }
-        .windowResizability(.contentSize)
-        #endif
     }
 
     private func performUndo() {
@@ -76,44 +55,5 @@ struct BalancesApp: App {
         guard ctx.undoManager?.canRedo == true else { return }
         ctx.undoManager?.redo()
         ctx.saveLoggingErrors()
-    }
-
-    /// Shows the standard "About Balances" panel with the current licensing status appended
-    /// to the credits, so license info is visible without opening Settings.
-    private func showAboutPanel() {
-        let licenseText: String
-        switch licensing.status {
-        case .licensed(let info):
-            let header = info.name.isEmpty ? "Licensed" : "Licensed to \(info.name)\n\(info.email)"
-            licenseText = "\(header)\n\(expirationText(for: info))"
-        case .trial(let daysLeft):
-            licenseText = daysLeft == 1 ? "Trial: 1 day left" : "Trial: \(daysLeft) days left"
-        case .blocked:
-            licenseText = "Trial expired"
-        case .unrestricted:
-            // Nothing to say about licensing in an App Store build; show the
-            // stock About panel.
-            NSApp.orderFrontStandardAboutPanel(options: [:])
-            return
-        }
-
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .center
-
-        let credits = NSAttributedString(string: licenseText, attributes: [
-            .font: NSFont.systemFont(ofSize: 11),
-            .foregroundColor: NSColor.secondaryLabelColor,
-            .paragraphStyle: paragraphStyle,
-        ])
-
-        NSApp.orderFrontStandardAboutPanel(options: [.credits: credits])
-    }
-
-    /// "Perpetual license" if `info.expiration` is nil, otherwise "Expires <date>".
-    private func expirationText(for info: LicenseVerifier.LicenseInfo) -> String {
-        guard let expiration = info.expiration else { return "Perpetual license" }
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        return "Expires \(formatter.string(from: expiration))"
     }
 }

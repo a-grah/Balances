@@ -7,20 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00D77EA1F40E4940BAEE23B8 /* LicensingGateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022580A411EB45FA92AD379B /* LicensingGateView.swift */; };
 		0891833B7EC24A73A08FC86D /* IntentsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAB2957D81244FCB88B844D /* IntentsDataProvider.swift */; };
 		1895A42F47A44A57B1822CFB /* AddBalanceEntryIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6466A8932C3A4B31A20F0077 /* AddBalanceEntryIntent.swift */; };
 		1CA0F31AAB48B282688B0EFF /* CoreDataAdapters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E364FDE4A0F606A728FC028 /* CoreDataAdapters.swift */; };
-		1D9F50B270EE41B6BE3E45F0 /* LicenseVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80F5D08E8E14E4590DE56CE /* LicenseVerifier.swift */; };
 		1F10BDD8DF8B64F131A6C37E /* BalancesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CB6B2AA09762F03E306386 /* BalancesApp.swift */; };
 		28E8B73C2E174FE8A8FAD17C /* GetPortfolioSummaryIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8A33DBF45543ADAE18E7E5 /* GetPortfolioSummaryIntent.swift */; };
 		2EB3C27214F06C38FC56CCAC /* DateRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3D77AE4BA7567E82A05D0E /* DateRange.swift */; };
 		355041F0A09A250DEE4143AB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7627741053ECD9EBC54BB2E /* ContentView.swift */; };
 		3E35CE8C67A8A1D2CEF05069 /* BalancesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F07F329B2935E83C869CD5 /* BalancesTableView.swift */; };
-		4117FF82BA5B4AA1B03526B6 /* SettingsLicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B80D41745B346E1B53EF73C /* SettingsLicenseView.swift */; };
 		4F6EB2F7E93CECFC59644946 /* Balances.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AC83687B63FD60BD00BB3ADB /* Balances.xcdatamodeld */; };
 		52DBA75718417C6077F87C4D /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355B76CB7451179291173223 /* Persistence.swift */; };
-		5CDEA26A4BCF4025B45A7EC0 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93C327463D4F5E9A1DD84C /* RootView.swift */; };
 		631A2B263A5C29364956C752 /* TSXComparisonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA6014146D4C9C8E43A0D31 /* TSXComparisonView.swift */; };
 		65585A720BDFA1A81106ED00 /* CSVPorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6320912DFB5F39AF2FF6196 /* CSVPorter.swift */; };
 		728BDE0A200E47E806227619 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76AAE4BAFD755A247486F53 /* Formatters.swift */; };
@@ -30,112 +26,58 @@
 		8D2E3F4A5B6C7D8E9F0A1B2C /* ScriptingSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D2E3F4A5B6C7D8E9F0A1B /* ScriptingSupport.swift */; };
 		8F48242D25E0D2106B4786F8 /* NewEntryFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6F76E31AD44C884EA4A75B /* NewEntryFormView.swift */; };
 		916C86A048FC7234DEA2C44C /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE37AAF695C983F816FEB9ED /* DashboardView.swift */; };
-		9F1E2D3C4B5A6978E0D1C2B3 /* LicenseEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D2C3B4A5968F7E6D5C4B3 /* LicenseEntryView.swift */; };
-		A37EFA64638642BE8B34FD29 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3DF09F76B042FA9768EBAE /* KeychainStore.swift */; };
 		A4974D79CBA2C05B3C4A8F02 /* balances_seed.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B67435EA965ED34EAAC3606 /* balances_seed.json */; };
 		ABF26817549E411EBBD4CE90 /* BalancesShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A12C0DB1324685A16ECE7A /* BalancesShortcuts.swift */; };
-		AD0000000000000000000002 /* Distribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000001 /* Distribution.swift */; };
-		AD0000000000000000000003 /* BalancesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CB6B2AA09762F03E306386 /* BalancesApp.swift */; };
-		AD0000000000000000000004 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355B76CB7451179291173223 /* Persistence.swift */; };
-		AD0000000000000000000005 /* Distribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000001 /* Distribution.swift */; };
-		AD0000000000000000000006 /* CSVPorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6320912DFB5F39AF2FF6196 /* CSVPorter.swift */; };
-		AD0000000000000000000007 /* CoreDataAdapters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E364FDE4A0F606A728FC028 /* CoreDataAdapters.swift */; };
-		AD0000000000000000000008 /* DateRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3D77AE4BA7567E82A05D0E /* DateRange.swift */; };
-		AD0000000000000000000009 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76AAE4BAFD755A247486F53 /* Formatters.swift */; };
-		AD000000000000000000000A /* PortfolioStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A57458DE30A67FB200E57B /* PortfolioStats.swift */; };
-		AD000000000000000000000B /* SeedImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F25C887BB4C2D19641F3460 /* SeedImporter.swift */; };
-		AD000000000000000000000C /* BalanceChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F57DD3E61825739A8D172A3 /* BalanceChartView.swift */; };
-		AD000000000000000000000D /* BalancesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F07F329B2935E83C869CD5 /* BalancesTableView.swift */; };
-		AD000000000000000000000E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7627741053ECD9EBC54BB2E /* ContentView.swift */; };
-		AD000000000000000000000F /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE37AAF695C983F816FEB9ED /* DashboardView.swift */; };
-		AD0000000000000000000010 /* NewEntryFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6F76E31AD44C884EA4A75B /* NewEntryFormView.swift */; };
-		AD0000000000000000000011 /* StatsPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DB0A406A92F466307193C4 /* StatsPanelView.swift */; };
-		AD0000000000000000000012 /* TSXComparisonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA6014146D4C9C8E43A0D31 /* TSXComparisonView.swift */; };
-		AD0000000000000000000013 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3DF09F76B042FA9768EBAE /* KeychainStore.swift */; };
-		AD0000000000000000000014 /* LicenseVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80F5D08E8E14E4590DE56CE /* LicenseVerifier.swift */; };
-		AD0000000000000000000015 /* LicenseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6B3E73B87D4A32A61C1262 /* LicenseStore.swift */; };
-		AD0000000000000000000016 /* LicensingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFDB2D5ADF04C8CAD5A4AFB /* LicensingState.swift */; };
-		AD0000000000000000000017 /* LicenseEntryControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485B67293F91472CBC43FE7C /* LicenseEntryControls.swift */; };
-		AD0000000000000000000018 /* LicensingGateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022580A411EB45FA92AD379B /* LicensingGateView.swift */; };
-		AD0000000000000000000019 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93C327463D4F5E9A1DD84C /* RootView.swift */; };
-		AD000000000000000000001A /* SettingsLicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B80D41745B346E1B53EF73C /* SettingsLicenseView.swift */; };
-		AD000000000000000000001B /* LicenseEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D2C3B4A5968F7E6D5C4B3 /* LicenseEntryView.swift */; };
-		AD000000000000000000001C /* Balances.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AC83687B63FD60BD00BB3ADB /* Balances.xcdatamodeld */; };
-		AD000000000000000000001D /* ScriptingSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D2E3F4A5B6C7D8E9F0A1B /* ScriptingSupport.swift */; };
-		AD000000000000000000001E /* IntentsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAB2957D81244FCB88B844D /* IntentsDataProvider.swift */; };
-		AD000000000000000000001F /* BalanceEntryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D364B46B468442D9E92C52C /* BalanceEntryEntity.swift */; };
-		AD0000000000000000000020 /* AddBalanceEntryIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6466A8932C3A4B31A20F0077 /* AddBalanceEntryIntent.swift */; };
-		AD0000000000000000000021 /* GetPortfolioSummaryIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8A33DBF45543ADAE18E7E5 /* GetPortfolioSummaryIntent.swift */; };
-		AD0000000000000000000022 /* BalancesShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A12C0DB1324685A16ECE7A /* BalancesShortcuts.swift */; };
-		AD0000000000000000000023 /* balances_seed.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B67435EA965ED34EAAC3606 /* balances_seed.json */; };
-		AD0000000000000000000024 /* tsx_seed.json in Resources */ = {isa = PBXBuildFile; fileRef = 0D764778ADA9DE415A6C2772 /* tsx_seed.json */; };
-		AD0000000000000000000025 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B04B2273026590A440D27C9 /* Assets.xcassets */; };
-		AD0000000000000000000026 /* Balances.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 9E3F4A5B6C7D8E9F0A1B2C3D /* Balances.sdef */; };
 		AF4A5B6C7D8E9F0A1B2C3D4E /* Balances.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 9E3F4A5B6C7D8E9F0A1B2C3D /* Balances.sdef */; };
 		BA2DA25F256CF2DDEC54B239 /* tsx_seed.json in Resources */ = {isa = PBXBuildFile; fileRef = 0D764778ADA9DE415A6C2772 /* tsx_seed.json */; };
 		CA0984383E9F1AF23CDDEC7C /* PortfolioStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A57458DE30A67FB200E57B /* PortfolioStats.swift */; };
 		CE01411A150E419C88FC9E68 /* StatsPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DB0A406A92F466307193C4 /* StatsPanelView.swift */; };
 		D110E59802FA67AAD945A656 /* SeedImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F25C887BB4C2D19641F3460 /* SeedImporter.swift */; };
-		E4848187485E49AE9E73D10E /* LicenseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6B3E73B87D4A32A61C1262 /* LicenseStore.swift */; };
-		EF77F51FA0A74B0797927789 /* LicenseEntryControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485B67293F91472CBC43FE7C /* LicenseEntryControls.swift */; };
-		FC64EDEE5E0E4401955D9CCF /* LicensingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFDB2D5ADF04C8CAD5A4AFB /* LicensingState.swift */; };
+		C3A4026D6C2B28BE387B0BEF /* Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D39877FC6A78430C81BC42 /* Updater.swift */; };
+		37EA19E1E187F3510F3F2D52 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B3B51479FA0E0E91A354F6 /* SettingsView.swift */; };
+		50E500B1D4550CE32F9E08CA /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 19EDBC8E8DD21D9C09B6856C /* Sparkle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		01A57458DE30A67FB200E57B /* PortfolioStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioStats.swift; sourceTree = "<group>"; };
-		022580A411EB45FA92AD379B /* LicensingGateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicensingGateView.swift; sourceTree = "<group>"; };
 		0A3D77AE4BA7567E82A05D0E /* DateRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRange.swift; sourceTree = "<group>"; };
 		0D364B46B468442D9E92C52C /* BalanceEntryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceEntryEntity.swift; sourceTree = "<group>"; };
 		0D764778ADA9DE415A6C2772 /* tsx_seed.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = tsx_seed.json; sourceTree = "<group>"; };
 		1507F021100E808DBE2FAA00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1B67435EA965ED34EAAC3606 /* balances_seed.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = balances_seed.json; sourceTree = "<group>"; };
 		1E364FDE4A0F606A728FC028 /* CoreDataAdapters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataAdapters.swift; sourceTree = "<group>"; };
-		2B3DF09F76B042FA9768EBAE /* KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
-		2B80D41745B346E1B53EF73C /* SettingsLicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLicenseView.swift; sourceTree = "<group>"; };
 		355B76CB7451179291173223 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		38A007151ABE87CC01A5B6E9 /* Balances.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Balances.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B8A33DBF45543ADAE18E7E5 /* GetPortfolioSummaryIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPortfolioSummaryIntent.swift; sourceTree = "<group>"; };
 		3F57DD3E61825739A8D172A3 /* BalanceChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceChartView.swift; sourceTree = "<group>"; };
-		485B67293F91472CBC43FE7C /* LicenseEntryControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseEntryControls.swift; sourceTree = "<group>"; };
 		49A12C0DB1324685A16ECE7A /* BalancesShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalancesShortcuts.swift; sourceTree = "<group>"; };
 		4BA6014146D4C9C8E43A0D31 /* TSXComparisonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TSXComparisonView.swift; sourceTree = "<group>"; };
 		4F6F76E31AD44C884EA4A75B /* NewEntryFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntryFormView.swift; sourceTree = "<group>"; };
 		5B04B2273026590A440D27C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5B15A16BA7386D7C5079CD7E /* Balances.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Balances.entitlements; sourceTree = "<group>"; };
 		6466A8932C3A4B31A20F0077 /* AddBalanceEntryIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBalanceEntryIntent.swift; sourceTree = "<group>"; };
-		7AFDB2D5ADF04C8CAD5A4AFB /* LicensingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicensingState.swift; sourceTree = "<group>"; };
 		7C1D2E3F4A5B6C7D8E9F0A1B /* ScriptingSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptingSupport.swift; sourceTree = "<group>"; };
-		7E1D2C3B4A5968F7E6D5C4B3 /* LicenseEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseEntryView.swift; sourceTree = "<group>"; };
 		96CB6B2AA09762F03E306386 /* BalancesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalancesApp.swift; sourceTree = "<group>"; };
 		9E3F4A5B6C7D8E9F0A1B2C3D /* Balances.sdef */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Balances.sdef; sourceTree = "<group>"; };
 		9F25C887BB4C2D19641F3460 /* SeedImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedImporter.swift; sourceTree = "<group>"; };
 		A76AAE4BAFD755A247486F53 /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
-		AD0000000000000000000001 /* Distribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Distribution.swift; sourceTree = "<group>"; };
-		AD000000000000000000002A /* Balances.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Balances.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1F07F329B2935E83C869CD5 /* BalancesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalancesTableView.swift; sourceTree = "<group>"; };
 		C6320912DFB5F39AF2FF6196 /* CSVPorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVPorter.swift; sourceTree = "<group>"; };
 		CEAB2957D81244FCB88B844D /* IntentsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentsDataProvider.swift; sourceTree = "<group>"; };
 		D5DB0A406A92F466307193C4 /* StatsPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsPanelView.swift; sourceTree = "<group>"; };
 		D7627741053ECD9EBC54BB2E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		DB6B3E73B87D4A32A61C1262 /* LicenseStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseStore.swift; sourceTree = "<group>"; };
 		DE37AAF695C983F816FEB9ED /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		E686880C6425A431BC558067 /* Balances.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Balances.xcdatamodel; sourceTree = "<group>"; };
-		F80F5D08E8E14E4590DE56CE /* LicenseVerifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseVerifier.swift; sourceTree = "<group>"; };
-		FA93C327463D4F5E9A1DD84C /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		12D39877FC6A78430C81BC42 /* Updater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Updater.swift; sourceTree = "<group>"; };
+		32B3B51479FA0E0E91A354F6 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		AD0000000000000000000029 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		CF5BDB0BEAFE176F9629192A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50E500B1D4550CE32F9E08CA /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,11 +89,10 @@
 			children = (
 				96CB6B2AA09762F03E306386 /* BalancesApp.swift */,
 				355B76CB7451179291173223 /* Persistence.swift */,
-				AD0000000000000000000001 /* Distribution.swift */,
+				12D39877FC6A78430C81BC42 /* Updater.swift */,
 				AC83687B63FD60BD00BB3ADB /* Balances.xcdatamodeld */,
 				5B04B2273026590A440D27C9 /* Assets.xcassets */,
 				F47655696FADD8034DF690FF /* Model */,
-				3B584A608168441CBC356B9E /* Licensing */,
 				BA5B6C7D8E9F0A1B2C3D4E5F /* Scripting */,
 				3F23358C58EC43128E79345E /* Intents */,
 				D8AA556D97B214A15F0ECBDB /* Views */,
@@ -161,17 +102,6 @@
 				9E3F4A5B6C7D8E9F0A1B2C3D /* Balances.sdef */,
 			);
 			path = Balances;
-			sourceTree = "<group>";
-		};
-		3B584A608168441CBC356B9E /* Licensing */ = {
-			isa = PBXGroup;
-			children = (
-				2B3DF09F76B042FA9768EBAE /* KeychainStore.swift */,
-				DB6B3E73B87D4A32A61C1262 /* LicenseStore.swift */,
-				F80F5D08E8E14E4590DE56CE /* LicenseVerifier.swift */,
-				7AFDB2D5ADF04C8CAD5A4AFB /* LicensingState.swift */,
-			);
-			path = Licensing;
 			sourceTree = "<group>";
 		};
 		3F23358C58EC43128E79345E /* Intents */ = {
@@ -207,7 +137,6 @@
 			isa = PBXGroup;
 			children = (
 				38A007151ABE87CC01A5B6E9 /* Balances.app */,
-				AD000000000000000000002A /* Balances.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -227,12 +156,8 @@
 				B1F07F329B2935E83C869CD5 /* BalancesTableView.swift */,
 				D7627741053ECD9EBC54BB2E /* ContentView.swift */,
 				DE37AAF695C983F816FEB9ED /* DashboardView.swift */,
-				485B67293F91472CBC43FE7C /* LicenseEntryControls.swift */,
-				022580A411EB45FA92AD379B /* LicensingGateView.swift */,
 				4F6F76E31AD44C884EA4A75B /* NewEntryFormView.swift */,
-				FA93C327463D4F5E9A1DD84C /* RootView.swift */,
-				2B80D41745B346E1B53EF73C /* SettingsLicenseView.swift */,
-				7E1D2C3B4A5968F7E6D5C4B3 /* LicenseEntryView.swift */,
+				32B3B51479FA0E0E91A354F6 /* SettingsView.swift */,
 				D5DB0A406A92F466307193C4 /* StatsPanelView.swift */,
 				4BA6014146D4C9C8E43A0D31 /* TSXComparisonView.swift */,
 			);
@@ -268,25 +193,11 @@
 			dependencies = (
 			);
 			name = Balances;
+			packageProductDependencies = (
+				19EDBC8E8DD21D9C09B6856C /* Sparkle */,
+			);
 			productName = Balances;
 			productReference = 38A007151ABE87CC01A5B6E9 /* Balances.app */;
-			productType = "com.apple.product-type.application";
-		};
-		AD000000000000000000002E /* Balances (App Store) */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AD000000000000000000002D /* Build configuration list for PBXNativeTarget "Balances (App Store)" */;
-			buildPhases = (
-				AD0000000000000000000027 /* Sources */,
-				AD0000000000000000000029 /* Frameworks */,
-				AD0000000000000000000028 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Balances (App Store)";
-			productName = Balances;
-			productReference = AD000000000000000000002A /* Balances.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -302,9 +213,6 @@
 					0E8A3AD980EC179856012B7E = {
 						CreatedOnToolsVersion = 26.5;
 					};
-					AD000000000000000000002E = {
-						CreatedOnToolsVersion = 26.5;
-					};
 				};
 			};
 			buildConfigurationList = 7198B1A165AEE41CD0DEE38D /* Build configuration list for PBXProject "Balances" */;
@@ -316,28 +224,19 @@
 				Base,
 			);
 			mainGroup = B12E2C6A612204367B8B4BCC;
+			packageReferences = (
+				54124F86AA33075CFB659519 /* XCRemoteSwiftPackageReference "Sparkle" */,
+			);
 			productRefGroup = B40202C75D4FB44D8C59CFA5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				0E8A3AD980EC179856012B7E /* Balances */,
-				AD000000000000000000002E /* Balances (App Store) */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		AD0000000000000000000028 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AD0000000000000000000023 /* balances_seed.json in Resources */,
-				AD0000000000000000000024 /* tsx_seed.json in Resources */,
-				AD0000000000000000000025 /* Assets.xcassets in Resources */,
-				AD0000000000000000000026 /* Balances.sdef in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C02F1309AF4906C92F1EAD44 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -358,7 +257,8 @@
 			files = (
 				1F10BDD8DF8B64F131A6C37E /* BalancesApp.swift in Sources */,
 				52DBA75718417C6077F87C4D /* Persistence.swift in Sources */,
-				AD0000000000000000000002 /* Distribution.swift in Sources */,
+				C3A4026D6C2B28BE387B0BEF /* Updater.swift in Sources */,
+				37EA19E1E187F3510F3F2D52 /* SettingsView.swift in Sources */,
 				65585A720BDFA1A81106ED00 /* CSVPorter.swift in Sources */,
 				1CA0F31AAB48B282688B0EFF /* CoreDataAdapters.swift in Sources */,
 				2EB3C27214F06C38FC56CCAC /* DateRange.swift in Sources */,
@@ -372,15 +272,6 @@
 				8F48242D25E0D2106B4786F8 /* NewEntryFormView.swift in Sources */,
 				CE01411A150E419C88FC9E68 /* StatsPanelView.swift in Sources */,
 				631A2B263A5C29364956C752 /* TSXComparisonView.swift in Sources */,
-				A37EFA64638642BE8B34FD29 /* KeychainStore.swift in Sources */,
-				1D9F50B270EE41B6BE3E45F0 /* LicenseVerifier.swift in Sources */,
-				E4848187485E49AE9E73D10E /* LicenseStore.swift in Sources */,
-				FC64EDEE5E0E4401955D9CCF /* LicensingState.swift in Sources */,
-				EF77F51FA0A74B0797927789 /* LicenseEntryControls.swift in Sources */,
-				00D77EA1F40E4940BAEE23B8 /* LicensingGateView.swift in Sources */,
-				5CDEA26A4BCF4025B45A7EC0 /* RootView.swift in Sources */,
-				4117FF82BA5B4AA1B03526B6 /* SettingsLicenseView.swift in Sources */,
-				9F1E2D3C4B5A6978E0D1C2B3 /* LicenseEntryView.swift in Sources */,
 				4F6EB2F7E93CECFC59644946 /* Balances.xcdatamodeld in Sources */,
 				8D2E3F4A5B6C7D8E9F0A1B2C /* ScriptingSupport.swift in Sources */,
 				0891833B7EC24A73A08FC86D /* IntentsDataProvider.swift in Sources */,
@@ -388,45 +279,6 @@
 				1895A42F47A44A57B1822CFB /* AddBalanceEntryIntent.swift in Sources */,
 				28E8B73C2E174FE8A8FAD17C /* GetPortfolioSummaryIntent.swift in Sources */,
 				ABF26817549E411EBBD4CE90 /* BalancesShortcuts.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AD0000000000000000000027 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AD0000000000000000000003 /* BalancesApp.swift in Sources */,
-				AD0000000000000000000004 /* Persistence.swift in Sources */,
-				AD0000000000000000000005 /* Distribution.swift in Sources */,
-				AD0000000000000000000006 /* CSVPorter.swift in Sources */,
-				AD0000000000000000000007 /* CoreDataAdapters.swift in Sources */,
-				AD0000000000000000000008 /* DateRange.swift in Sources */,
-				AD0000000000000000000009 /* Formatters.swift in Sources */,
-				AD000000000000000000000A /* PortfolioStats.swift in Sources */,
-				AD000000000000000000000B /* SeedImporter.swift in Sources */,
-				AD000000000000000000000C /* BalanceChartView.swift in Sources */,
-				AD000000000000000000000D /* BalancesTableView.swift in Sources */,
-				AD000000000000000000000E /* ContentView.swift in Sources */,
-				AD000000000000000000000F /* DashboardView.swift in Sources */,
-				AD0000000000000000000010 /* NewEntryFormView.swift in Sources */,
-				AD0000000000000000000011 /* StatsPanelView.swift in Sources */,
-				AD0000000000000000000012 /* TSXComparisonView.swift in Sources */,
-				AD0000000000000000000013 /* KeychainStore.swift in Sources */,
-				AD0000000000000000000014 /* LicenseVerifier.swift in Sources */,
-				AD0000000000000000000015 /* LicenseStore.swift in Sources */,
-				AD0000000000000000000016 /* LicensingState.swift in Sources */,
-				AD0000000000000000000017 /* LicenseEntryControls.swift in Sources */,
-				AD0000000000000000000018 /* LicensingGateView.swift in Sources */,
-				AD0000000000000000000019 /* RootView.swift in Sources */,
-				AD000000000000000000001A /* SettingsLicenseView.swift in Sources */,
-				AD000000000000000000001B /* LicenseEntryView.swift in Sources */,
-				AD000000000000000000001C /* Balances.xcdatamodeld in Sources */,
-				AD000000000000000000001D /* ScriptingSupport.swift in Sources */,
-				AD000000000000000000001E /* IntentsDataProvider.swift in Sources */,
-				AD000000000000000000001F /* BalanceEntryEntity.swift in Sources */,
-				AD0000000000000000000020 /* AddBalanceEntryIntent.swift in Sources */,
-				AD0000000000000000000021 /* GetPortfolioSummaryIntent.swift in Sources */,
-				AD0000000000000000000022 /* BalancesShortcuts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,13 +293,13 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = "$(MARKETING_VERSION)";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Balances/Info.plist;
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MARKETING_VERSION = 1.6;
+				MARKETING_VERSION = 1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bluepill.Balances;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -517,62 +369,15 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = "$(MARKETING_VERSION)";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Balances/Info.plist;
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MARKETING_VERSION = 1.6;
+				MARKETING_VERSION = 1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bluepill.Balances;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-			};
-			name = Release;
-		};
-		AD000000000000000000002B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Balances/Balances.entitlements;
-				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 7;
-				DEVELOPMENT_TEAM = U49FDFXMTH;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = Balances/Info.plist;
-				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MARKETING_VERSION = 1.6;
-				PRODUCT_BUNDLE_IDENTIFIER = ca.bluepill.Balances;
-				PRODUCT_NAME = Balances;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "APPSTORE $(inherited)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-			};
-			name = Debug;
-		};
-		AD000000000000000000002C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Balances/Balances.entitlements;
-				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 7;
-				DEVELOPMENT_TEAM = U49FDFXMTH;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = Balances/Info.plist;
-				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MARKETING_VERSION = 1.6;
-				PRODUCT_BUNDLE_IDENTIFIER = ca.bluepill.Balances;
-				PRODUCT_NAME = Balances;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "APPSTORE $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Release;
@@ -585,15 +390,6 @@
 			buildConfigurations = (
 				62C0502E9DD2F4A0E153A290 /* Debug */,
 				A1076DB52F6D567F23A74575 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AD000000000000000000002D /* Build configuration list for PBXNativeTarget "Balances (App Store)" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AD000000000000000000002B /* Debug */,
-				AD000000000000000000002C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -621,6 +417,25 @@
 			versionGroupType = wrapper.xcdatamodel;
 		};
 /* End XCVersionGroup section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		54124F86AA33075CFB659519 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = exactVersion;
+				version = 2.10.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		19EDBC8E8DD21D9C09B6856C /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 54124F86AA33075CFB659519 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 98F54143AB4E86B28C3AFEE0 /* Project object */;
 }

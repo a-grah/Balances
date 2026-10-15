@@ -38,6 +38,16 @@ A spreadsheet could do most of this — the difference is friction and focus, no
 - Editable yearly benchmark (index return, cash flows, actual start/end) with a chained "TSX Simulated" value.
 - Summary comparing **Your Portfolio** vs **TSX Equivalent** vs **Difference**. The Your-Portfolio column is computed from your real balance entries (so it matches the Dashboard).
 
+## Install
+
+Balances is free. Download the latest `Balances-<version>.dmg` from [Releases](https://github.com/a-grah/Balances/releases/latest), open it, and drag Balances to Applications. Builds are Developer ID-signed and notarized.
+
+The app updates itself with [Sparkle](https://sparkle-project.org): it reads `appcast.xml` from the latest GitHub release. Use **Balances → Check for Updates…**, or turn automatic checks on or off in Settings.
+
+## Releasing
+
+Bump `MARKETING_VERSION` (the build number follows it), commit, and push a matching tag, e.g. `git tag v1.8 && git push origin v1.8`. The Release workflow builds, signs, notarizes, and staples the DMG, signs it for Sparkle, and publishes it with `appcast.xml` as a GitHub release.
+
 ## Requirements
 
 - macOS 14.0 or later (deployment target)
@@ -83,6 +93,7 @@ Balances.xcodeproj            # hand-authored Xcode project
 Balances/
   BalancesApp.swift           # @main; Core Data context + undo manager + menu commands
   Persistence.swift           # NSPersistentContainer (SQLite)
+  Updater.swift               # Sparkle updater (feed: latest GitHub release)
   Balances.xcdatamodeld       # BalanceEntry, TSXYear entities
   Assets.xcassets             # app icon
   Model/
@@ -97,6 +108,7 @@ Balances/
     DashboardView.swift, NewEntryFormView.swift, StatsPanelView.swift, BalanceChartView.swift
     BalancesTableView.swift   # editable table + CSV + editor sheet
     TSXComparisonView.swift   # yearly benchmark + comparison summary
+    SettingsView.swift        # Settings window (update checks)
   Resources/                  # synthetic sample seed JSON
 ```
 

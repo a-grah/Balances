@@ -72,6 +72,14 @@ ditto "$DERIVED/Build/Products/Release/Balances.app" "$APP"
 # Guarantees no stray entitlements and a secure timestamp, regardless of how
 # Xcode signed during the build.
 echo "==> Signing (hardened runtime, secure timestamp)…"
+# Sparkle's helpers first, inside out, as Sparkle's documentation describes.
+SPARKLE="$APP/Contents/Frameworks/Sparkle.framework"
+sign() { codesign --force --options runtime --timestamp --sign "$SIGN_IDENTITY" "$@"; }
+sign "$SPARKLE/Versions/B/XPCServices/Installer.xpc"
+sign --preserve-metadata=entitlements "$SPARKLE/Versions/B/XPCServices/Downloader.xpc"
+sign "$SPARKLE/Versions/B/Autoupdate"
+sign "$SPARKLE/Versions/B/Updater.app"
+sign "$SPARKLE"
 codesign --force --options runtime --timestamp \
   --sign "$SIGN_IDENTITY" \
   --entitlements "$ENTITLEMENTS" \
