@@ -5,12 +5,12 @@ name: Release
 #   - Running it by hand (Actions → Release → Run workflow) only uploads the DMG
 #     as a workflow artifact.
 #
-# Secrets live in the "release" environment so only this workflow can read them:
-#   DEVELOPER_ID_P12_BASE64    base64 of the exported "Developer ID Application" .p12
+# Repository secrets (same names and encoding as the dvdForge release workflow):
+#   DEVELOPER_ID_P12           base64 of the exported "Developer ID Application" .p12
 #   DEVELOPER_ID_P12_PASSWORD  the password the .p12 was exported with
-#   NOTARY_API_KEY_BASE64      base64 of the App Store Connect API key (.p8)
-#   NOTARY_API_KEY_ID          that key's Key ID
-#   NOTARY_API_ISSUER_ID       the App Store Connect Issuer ID
+#   NOTARY_KEY                 base64 of an App Store Connect API key (.p8)
+#   NOTARY_KEY_ID              that key's ID
+#   NOTARY_ISSUER_ID           the App Store Connect issuer ID
 
 on:
   push:
@@ -28,7 +28,6 @@ jobs:
   release:
     name: Sign, notarize, and package
     runs-on: macos-15
-    environment: release
     steps:
       - uses: actions/checkout@v5
 
@@ -50,7 +49,7 @@ jobs:
 
       - name: Import the signing certificate
         env:
-          P12_BASE64: ${{ secrets.DEVELOPER_ID_P12_BASE64 }}
+          P12_BASE64: ${{ secrets.DEVELOPER_ID_P12 }}
           P12_PASSWORD: ${{ secrets.DEVELOPER_ID_P12_PASSWORD }}
         run: |
           keychain="$RUNNER_TEMP/signing.keychain-db"
@@ -75,14 +74,14 @@ jobs:
 
       - name: Write the notary API key
         env:
-          NOTARY_KEY_BASE64: ${{ secrets.NOTARY_API_KEY_BASE64 }}
+          NOTARY_KEY_BASE64: ${{ secrets.NOTARY_KEY }}
         run: echo "$NOTARY_KEY_BASE64" | base64 --decode > "$RUNNER_TEMP/notary_key.p8"
 
       - name: Build, sign, notarize, and package
         env:
           NOTARY_KEY_PATH: ${{ runner.temp }}/notary_key.p8
-          NOTARY_KEY_ID: ${{ secrets.NOTARY_API_KEY_ID }}
-          NOTARY_ISSUER_ID: ${{ secrets.NOTARY_API_ISSUER_ID }}
+          NOTARY_KEY_ID: ${{ secrets.NOTARY_KEY_ID }}
+          NOTARY_ISSUER_ID: ${{ secrets.NOTARY_ISSUER_ID }}
         run: scripts/release.sh
 
       - name: Upload the DMG as an artifact
