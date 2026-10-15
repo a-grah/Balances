@@ -85,7 +85,7 @@ jobs:
         run: scripts/release.sh
 
       - name: Upload the DMG as an artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Balances-dmg
           path: dist/Balances-*.dmg
