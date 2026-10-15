@@ -12,6 +12,9 @@
 #   - A stored notarytool credential profile (see NOTARY_PROFILE below), created with:
 #       xcrun notarytool store-credentials "balances-notary" \
 #         --apple-id <id> --team-id UVNB86SP95 --password <app-specific-pw>
+#     or, instead of a profile, an App Store Connect API key passed through
+#     NOTARY_KEY_PATH (.p8 file), NOTARY_KEY_ID and NOTARY_ISSUER_ID — this is
+#     how CI (.github/workflows/release.yml) notarizes.
 #
 # Usage:
 #   scripts/release.sh                # full build → notarize → staple → dmg
@@ -20,11 +23,17 @@
 set -euo pipefail
 
 # ---- Config ----------------------------------------------------------------
-SIGN_IDENTITY="Developer ID Application: Blue Pill Software Ltd. (UVNB86SP95)"
-NOTARY_PROFILE="balances-notary"
+SIGN_IDENTITY="${SIGN_IDENTITY:-Developer ID Application: Blue Pill Software Ltd. (UVNB86SP95)}"
+NOTARY_PROFILE="${NOTARY_PROFILE:-balances-notary}"
 SCHEME="Balances"
 PROJECT="Balances.xcodeproj"
 ENTITLEMENTS="Balances/Balances.entitlements"
+
+if [[ -n "${NOTARY_KEY_PATH:-}" ]]; then
+  NOTARY_AUTH=(--key "$NOTARY_KEY_PATH" --key-id "${NOTARY_KEY_ID:?}" --issuer "${NOTARY_ISSUER_ID:?}")
+else
+  NOTARY_AUTH=(--keychain-profile "$NOTARY_PROFILE")
+fi
 
 # ---- Paths -----------------------------------------------------------------
 cd "$(dirname "$0")/.."          # repo root
@@ -84,7 +93,7 @@ fi
 echo "==> Notarizing app…"
 ZIP="$DIST/Balances-notarize.zip"
 ditto -c -k --keepParent "$APP" "$ZIP"
-xcrun notarytool submit "$ZIP" --keychain-profile "$NOTARY_PROFILE" --wait
+xcrun notarytool submit "$ZIP" "${NOTARY_AUTH[@]}" --wait
 rm -f "$ZIP"
 echo "==> Stapling app…"
 xcrun stapler staple "$APP"
@@ -111,7 +120,7 @@ echo "==> Signing DMG…"
 codesign --force --timestamp --sign "$SIGN_IDENTITY" "$DMG"
 
 echo "==> Notarizing DMG…"
-xcrun notarytool submit "$DMG" --keychain-profile "$NOTARY_PROFILE" --wait
+xcrun notarytool submit "$DMG" "${NOTARY_AUTH[@]}" --wait
 echo "==> Stapling DMG…"
 xcrun stapler staple "$DMG"
 
