@@ -113,7 +113,7 @@ ditto "$APP" "$STAGE/Balances.app"
 rm -f "$DMG"
 create-dmg \
   --volname "Balances $VERSION" \
-  --background "scripts/dmg_background.png" \
+  --background "scripts/dmg-background.tiff" \
   --window-pos 200 120 \
   --window-size 660 400 \
   --icon-size 128 \
